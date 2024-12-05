@@ -10,8 +10,8 @@ public class CurtainController : MonoBehaviour
     
     private Vector3 leftClosedPosition = new Vector3(-3, 2, 0);
     private Vector3 rightClosedPosition = new Vector3(3, 2, 0);
-    private Vector3 leftOpenPosition = new Vector3(-7, 5, 0);
-    private Vector3 rightOpenPosition = new Vector3(7, 5, 0);
+    private Vector3 leftOpenPosition = new Vector3(-7, 10, 0);
+    private Vector3 rightOpenPosition = new Vector3(7, 10, 0);
 
     void Update()
     {
