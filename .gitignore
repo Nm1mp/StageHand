@@ -1,0 +1,9 @@
+[Ll]ibrary/
+[Tt]emps/
+[Oo]bj/
+[Bb]uild/
+UserSettings/
+Logs/
+.vs/
+.idea/
+.DS_Store/
