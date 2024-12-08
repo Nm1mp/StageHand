@@ -7,8 +7,8 @@ public class TaskManager : MonoBehaviour
     public TextMeshProUGUI taskText; 
     public GameObject completionTextObject; 
     public CanvasGroup taskCanvasGroup; 
-    public float fadeDuration = 1f; 
-    public float completionDisplayDuration = 3f; 
+    public float fadeDuration = 0.5f; 
+    public float completionDisplayDuration = 2f; 
 
     private int currentTaskIndex = 0;
     private string[] tasks = {
