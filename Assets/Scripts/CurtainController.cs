@@ -30,6 +30,7 @@ public class CurtainController : MonoBehaviour
         }
         else
         {
+            Debug.Log("working");
             
             leftCurtain.localPosition = Vector3.MoveTowards(leftCurtain.localPosition, leftClosedPosition, moveSpeed * Time.deltaTime);
             rightCurtain.localPosition = Vector3.MoveTowards(rightCurtain.localPosition, rightClosedPosition, moveSpeed * Time.deltaTime);
