@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\BackgroundRotator.cs" />
     <Compile Include="Assets\objMover.cs" />
     <Compile Include="Assets\Scripts\TaskManager.cs" />
+    <Compile Include="Assets\Scripts\PropRotationTestScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
