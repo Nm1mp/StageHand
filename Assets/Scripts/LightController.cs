@@ -46,6 +46,7 @@ public class LightController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             group3Active = !group3Active;
+
             SetLightsActive(group3Lights, group3Active);
         }
 
