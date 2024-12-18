@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using System.Diagnostics;
 
+[DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class TaskManager : MonoBehaviour
 {
     public TextMeshProUGUI taskText; 
@@ -95,6 +97,11 @@ public class TaskManager : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 0;
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return ToString();
     }
 }
 
