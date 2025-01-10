@@ -76,7 +76,6 @@
     <Compile Include="Assets\Scripts\BackgroundRotator.cs" />
     <Compile Include="Assets\objMover.cs" />
     <Compile Include="Assets\Ardity\Scripts\Samples\SampleUserPolling_JustRead.cs" />
-    <Compile Include="Assets\SeedGrow.cs" />
     <Compile Include="Assets\Scripts\TaskManager.cs" />
     <Compile Include="Assets\Ardity\Scripts\Threads\SerialThreadCustomDelimiter.cs" />
     <Compile Include="Assets\Scripts\Scene1\Scene1Test.cs" />
