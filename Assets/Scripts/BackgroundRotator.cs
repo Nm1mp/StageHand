@@ -8,10 +8,10 @@ public class BackgroundRotator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isRotating)
-        {
-            StartCoroutine(RotateBackground(90f)); 
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && !isRotating)
+        //{
+        //    StartCoroutine(RotateBackground(90f)); 
+        //}
     }
 
     private System.Collections.IEnumerator RotateBackground(float angle)
