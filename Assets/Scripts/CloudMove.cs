@@ -4,50 +4,57 @@ using UnityEngine;
 
 public class CloudMove : MonoBehaviour
 {
+    // Objects
     public GameObject Bush;
+    public GameObject Seed;
+    private bool bushSpawned = false;
+
+    // Bird things
     public Transform Bird;
-    public Transform Drum;
-    private bool Raining = false;
-    private bool rainStop = true;
-    public ParticleSystem Rain;
-    public GameObject RainHitbox;
     private float moveSpeed;
+    private Vector3 birdMove = new Vector3(-0.13f, -2.763f, 4.33f);
+
+    // Drum things
+    public Transform Drum;
+
+    // Rain things
+    private bool rainStarted = false;
+    public ParticleSystem Rain;
     public float RainFlow;
     private int rainTime = 5;
 
-    private Vector3 birdMove = new Vector3(-0.13f, -2.763f, 4.33f);
-
     void Update()
-    {
-        
+    {        
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Raining = true;
-            rainStop = false;
+            if (!rainStarted)
+            {
+                Debug.Log("Rain started");
+
+                Rain.Play();
+                rainStarted = true;
+            }
         }
 
-
-        if (Raining == true)
+        if (rainStarted)
         {
-            Rain.Play();
-            RainHitbox.SetActive(true);
             RainFlow += (1 * Time.deltaTime);
         }
 
-        if (rainStop == true)
+        if (RainFlow >= rainTime && rainStarted)
         {
+            Debug.Log("Rain stop");
+
             Rain.Stop();
-            RainHitbox.SetActive(false);
+            rainStarted = false;
+
+            Bush.SetActive(true);
+            Seed.SetActive(false);
         }
 
-        if (RainFlow >= rainTime)
+        if (Bush.activeSelf && !bushSpawned)
         {
-            Raining = false;
-            rainStop = true;
-        }
-
-        if (Bush.activeSelf == true)
-        {
+            bushSpawned = true;
             Debug.Log("Bush is active");
         }
     }
