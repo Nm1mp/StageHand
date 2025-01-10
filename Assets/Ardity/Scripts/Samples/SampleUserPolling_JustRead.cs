@@ -39,8 +39,8 @@ public class SampleUserPolling_JustRead : MonoBehaviour
         else
         {
             //Debug.Log("Message arrived: " + message);
-            var c1x = Map(float.Parse(message), 0, 1023, 4.3f, 13);
-            var c2x = Map(float.Parse(message), 0, 1023, -4.3f, -13);
+            var c1x = Map(float.Parse(message), 0.2f, 1023, 5, 13);
+            var c2x = Map(float.Parse(message), 0.2f, 1023, -5, -13);
             Cube1.transform.position = new Vector3(c1x, 0, 0);
             Cube2.transform.position = new Vector3(c2x, 0, 0);
         }
