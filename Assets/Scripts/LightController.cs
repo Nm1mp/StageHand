@@ -1,14 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using System.IO.Ports;
-
 
 public class LightController : MonoBehaviour
 {
-    SerialPort stream = new SerialPort("COM3", 9600);
-
     [SerializeField] private List<Light> group1Lights;
     [SerializeField] private Transform group1Target;
 
@@ -24,62 +19,31 @@ public class LightController : MonoBehaviour
 
     void Start()
     {
-        
         SetLightsActive(group1Lights, false);
         SetLightsActive(group2Lights, false);
         SetLightsActive(group3Lights, false);
-
-        // Open the serial port
-        stream.Open();
     }
 
     void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.G))
         {
             group1Active = !group1Active;
             SetLightsActive(group1Lights, group1Active);
         }
 
-        
-        if (stream.IsOpen)
-        {
-            try
-            {
-                string value = stream.ReadLine(); 
-                int intValue = int.Parse(value);  
-
-                if (intValue == 1) 
-                {
-                    SetLightsActive(group1Lights, true);
-                }
-                else if (intValue == 0) 
-                {
-                    SetLightsActive(group1Lights, false);
-                }
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning("Error reading serial input: " + e.Message);
-            }
-        }
-
-        
         if (Input.GetKeyDown(KeyCode.H))
         {
             group2Active = !group2Active;
             SetLightsActive(group2Lights, group2Active);
         }
 
-        
         if (Input.GetKeyDown(KeyCode.J))
         {
             group3Active = !group3Active;
             SetLightsActive(group3Lights, group3Active);
         }
 
-      
         if (group1Active && group1Target != null)
         {
             FollowTarget(group1Lights, group1Target);
@@ -102,7 +66,24 @@ public class LightController : MonoBehaviour
         {
             if (light != null)
             {
-                light.enabled = isActive; // Toggle lights on/off
+                light.enabled = isActive;
+
+                if (isActive && light.intensity == 0f)
+                {
+                    light.intensity = 1f; // Default intensity when turning on
+                }
+            }
+        }
+    }
+
+    private void SetLightsIntensity(List<Light> lights, float intensity)
+    {
+        foreach (Light light in lights)
+        {
+            if (light != null)
+            {
+                light.enabled = true;
+                light.intensity = intensity * 5f;
             }
         }
     }
@@ -118,3 +99,8 @@ public class LightController : MonoBehaviour
         }
     }
 }
+
+
+
+
+
