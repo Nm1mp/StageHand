@@ -9,9 +9,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
-    <ProjectGuid>{215A4B33-8E5E-E0B9-4294-B4AF98E1F8E7}</ProjectGuid>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{C6D3D869-6CC8-FE92-879F-484A7D6289E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -62,19 +61,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CurtainController.cs" />
-    <Compile Include="Assets\Scripts\CloudMove.cs" />
     <Compile Include="Assets\Ardity\Scripts\Samples\SampleUserPolling_ReadWrite.cs" />
+    <Compile Include="Assets\Scripts\Scene2\CloudMove.cs" />
     <Compile Include="Assets\Scripts\LightController.cs" />
     <Compile Include="Assets\Ardity\Scripts\Threads\AbstractSerialThread.cs" />
     <Compile Include="Assets\Ardity\Scripts\Threads\SerialThreadLines.cs" />
+    <Compile Include="Assets\Scripts\objMover.cs" />
     <Compile Include="Assets\Ardity\Scripts\Threads\SerialThread.cs" />
     <Compile Include="Assets\Ardity\Scripts\SerialController.cs" />
+    <Compile Include="Assets\Scripts\PickUp.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Ardity\Scripts\Samples\SampleMessageListener.cs" />
     <Compile Include="Assets\Scripts\TransportCube.cs" />
     <Compile Include="Assets\Ardity\Scripts\SerialControllerCustomDelimiter.cs" />
     <Compile Include="Assets\Scripts\BackgroundRotator.cs" />
-    <Compile Include="Assets\objMover.cs" />
     <Compile Include="Assets\Ardity\Scripts\Samples\SampleUserPolling_JustRead.cs" />
     <Compile Include="Assets\Scripts\TaskManager.cs" />
     <Compile Include="Assets\Ardity\Scripts\Threads\SerialThreadCustomDelimiter.cs" />
