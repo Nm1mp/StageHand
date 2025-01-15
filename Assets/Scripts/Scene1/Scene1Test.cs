@@ -7,7 +7,7 @@ public class Scene1Test : MonoBehaviour
     public Transform TreeTrunk;
     private bool onGround = false;
     public float moveSpeed = 2f;
-    private Vector3 trunkDisappear = new Vector3(6.3f, 13, 3);
+    private Vector3 trunkDisappear = new Vector3(2, 13, 4.8f);
 
    void Update()
     {
