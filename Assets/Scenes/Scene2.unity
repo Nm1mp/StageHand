@@ -5544,7 +5544,7 @@ Transform:
   m_GameObject: {fileID: 220621350}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 20.255234, y: 1.3398032, z: -21.40537}
+  m_LocalPosition: {x: 19.19, y: 1.3398032, z: -21.40537}
   m_LocalScale: {x: 19.307055, y: 0.43012002, z: 62.482014}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6713,12 +6713,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659352914}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &687991225 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c900a8d2770b4db468069ac516eb135c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2069521623}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &805406209
 GameObject:
   m_ObjectHideFlags: 0
@@ -7413,7 +7407,7 @@ Transform:
   m_GameObject: {fileID: 997429745}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -19.744766, y: 1.3598027, z: -21.40537}
+  m_LocalPosition: {x: -20.34, y: 1.3598027, z: -21.40537}
   m_LocalScale: {x: 20.219633, y: 0.43012002, z: 62.482014}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7768,6 +7762,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1326623920 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c900a8d2770b4db468069ac516eb135c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069521623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1416956002
 GameObject:
   m_ObjectHideFlags: 0
@@ -8780,7 +8780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365effd064787744980e5ec7f1a36a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bush: {fileID: 687991225}
+  Plant: {fileID: 1326623920}
   Seed: {fileID: 219538227}
   Bird: {fileID: 2012118140}
   Drum: {fileID: 1702920328}
