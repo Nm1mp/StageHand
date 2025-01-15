@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class objMover : MonoBehaviour
 {
-    public GameObject test;
-    [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed = 5f;
-    // Start is called before the first frame update
-    void Start()
-    {
-      
-    }
+    [SerializeField] private float minX = -5f;
+    [SerializeField] private float maxX = 5f;
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        Vector3 velocity = new Vector3 (moveX * speed, rb.velocity.y, rb.velocity.z);
-        rb.velocity = velocity;
-        
+        float horizontalInput = Input.GetAxis("Horizontal");
+        Vector3 movement = new Vector3(horizontalInput, 0, 0) * speed * Time.deltaTime;
+        transform.Translate(movement);
+
+        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
-    
 }
