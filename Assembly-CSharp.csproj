@@ -61,9 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CurtainController.cs" />
-    <Compile Include="Assets\Scripts\CloudMove.cs" />
+    <Compile Include="Assets\Scripts\CurtainControllerWithPotentiometer.cs" />
     <Compile Include="Assets\Ardity\Scripts\Samples\SampleUserPolling_ReadWrite.cs" />
     <Compile Include="Assets\Scripts\SlidePotLightControl.cs" />
+    <Compile Include="Assets\Scripts\Scene2\CloudMove.cs" />
     <Compile Include="Assets\Scripts\PotentionmeterMover.cs" />
     <Compile Include="Assets\Scripts\LightController.cs" />
     <Compile Include="Assets\Ardity\Scripts\Threads\AbstractSerialThread.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\Scripts\objMover.cs" />
     <Compile Include="Assets\Ardity\Scripts\Threads\SerialThread.cs" />
     <Compile Include="Assets\Ardity\Scripts\SerialController.cs" />
+    <Compile Include="Assets\Scripts\PickUp.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Ardity\Scripts\Samples\SampleMessageListener.cs" />
     <Compile Include="Assets\Scripts\TransportCube.cs" />
