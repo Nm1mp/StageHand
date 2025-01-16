@@ -30,8 +30,10 @@ public class CloudMove : MonoBehaviour
     private Vector3 cowMove = new Vector3(8.67f, -1.907f, 7.15f);
     // Trumpet things
     public Transform Trumpet;
-
-
+    private Vector3 trumpMove = new Vector3(6.09f, -3.049f, 3.326f);
+    // Dog Things
+    public Transform Dog;
+    private Vector3 dogMove = new Vector3(6.09f, -2.56f, 4.18f);
 
 
     void Update()
@@ -68,7 +70,6 @@ public class CloudMove : MonoBehaviour
             {
                 if (Bird != null && Drum != null)
                 {
-
                     Bird.localPosition = Vector3.MoveTowards(Bird.localPosition, birdMove, moveSpeed * Time.deltaTime);
                     Drum.localPosition = Vector3.MoveTowards(Drum.localPosition, drumMove, moveSpeed * Time.deltaTime);
                     Quaternion target = Quaternion.Euler(0, 0, 0);
@@ -82,16 +83,25 @@ public class CloudMove : MonoBehaviour
                     }
                     //Debug.Log("Bush is active");
                 }
-                else if (Cow != null) 
+                else if (Cow != null && Trumpet != null) 
                 {
                     Cow.localPosition = Vector3.MoveTowards(Cow.localPosition, cowMove, moveSpeed * Time.deltaTime);
-                    
+                    Trumpet.localPosition = Vector3.MoveTowards(Trumpet.localPosition, trumpMove, moveSpeed * Time.deltaTime);
+                    Quaternion goal = Quaternion.Euler(0, 0, 196.973f);
+                    Trumpet.rotation = Quaternion.Slerp(Trumpet.rotation, goal, Time.deltaTime * smooth);
+
                     if (Cow.localPosition == cowMove)
                     {
                         plantSpawned = true;
                     }
                 }
-                    //Debug.Log("Flower is active");
+
+                //Debug.Log("Flower is active");
+            }
+
+            if (Trumpet.localPosition == trumpMove)
+            {
+                Dog.localPosition = Vector3.MoveTowards(Dog.localPosition, dogMove, moveSpeed * Time.deltaTime); 
             }
         }
     }
