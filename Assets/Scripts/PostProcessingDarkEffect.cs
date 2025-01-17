@@ -11,8 +11,10 @@ public class PostProcessingDarkEffect : MonoBehaviour
     [SerializeField] private Volume postProcessingVolume;
     [SerializeField] private List<Light> lights;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject cat;
     private ColorAdjustments colorAdjustments;
     private MonoBehaviour playerMovementScript;
+    private MonoBehaviour catMovementScript;
 
     void Start()
     {
@@ -68,6 +70,10 @@ public class PostProcessingDarkEffect : MonoBehaviour
         if (playerMovementScript != null)
         {
             playerMovementScript.enabled = enable;
+        }
+        if (catMovementScript != null  )
+        {
+            catMovementScript.enabled = enable;
         }
     }
 }

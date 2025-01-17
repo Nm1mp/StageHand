@@ -5380,7 +5380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &148798404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6217,7 +6217,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441489305}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: feec1bf98727c0e4dab104b6c19c0ecb, type: 3}
   m_Name: 
@@ -6392,9 +6392,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a29ae01fb02574495d489a18e9bd35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 478510612}
-  rb: {fileID: 478510617}
   speed: 5
+  minX: -5
+  maxX: 5
 --- !u!1 &579262887
 GameObject:
   m_ObjectHideFlags: 0
@@ -8418,6 +8418,7 @@ GameObject:
   - component: {fileID: 1650499270}
   - component: {fileID: 1650499271}
   - component: {fileID: 1650499272}
+  - component: {fileID: 1650499273}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -8478,6 +8479,27 @@ MonoBehaviour:
   group3Lights:
   - {fileID: 1965134079}
   group3Target: {fileID: 0}
+--- !u!114 &1650499273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650499268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111b4a7c11ee8654f84c300267558dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftCurtain: {fileID: 0}
+  rightCurtain: {fileID: 0}
+  moveSpeed: 2
+  isScene1: 0
+  scene1Test: {fileID: 0}
+  isScene2: 0
+  drum: {fileID: 6389064088857561754}
+  portName: COM5
+  baudRate: 9600
 --- !u!1 &1655482048
 GameObject:
   m_ObjectHideFlags: 0
@@ -8786,6 +8808,8 @@ MonoBehaviour:
   Drum: {fileID: 1702920328}
   Rain: {fileID: 2049750590}
   RainFlow: 0
+  Cow: {fileID: 0}
+  Trumpet: {fileID: 0}
 --- !u!1 &1957476660
 GameObject:
   m_ObjectHideFlags: 0
@@ -14163,6 +14187,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 128384, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -14437,6 +14465,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72ec814047c6db141895b4ccc5e8bdd7, type: 3}
+--- !u!1 &6389064088857561754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 360614933552076294, guid: 72ec814047c6db141895b4ccc5e8bdd7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6389064088857561753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
