@@ -8,14 +8,41 @@ public class PickUp : MonoBehaviour
     public GameObject drum;
     public GameObject playerDrum;
     public GameObject invisWall;
+    private bool drumNotHere = false;
+    //scene 3
+    public GameObject Trumpet;
+    public GameObject PlayerTrump;
+    private bool trumpNotHere;
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (drum.activeSelf)
+        if (drum != null)
         {
-            playerDrum.SetActive(true);
-            drum.SetActive(false);
-            invisWall.SetActive(false);
+            if (drum.activeSelf && !drumNotHere)
+            {
+                playerDrum.SetActive(true);
+                drum.SetActive(false);
+                invisWall.SetActive(false);
+            }
+            else
+            {
+                drumNotHere = true;
+            }
+        }
+
+        if (Trumpet != null)
+        {
+            if (Trumpet.activeSelf && !trumpNotHere)
+            {
+                PlayerTrump.SetActive(true);
+                Trumpet.SetActive(false);
+                //invisWall.SetActive(false);
+            }
+            else
+            {
+                trumpNotHere = true;
+            }
         }
     }
 }
