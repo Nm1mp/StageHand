@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using UnityEngine;
 
-using UnityEngine;
-using System.IO.Ports;
 
 public class SlidePotLightControl : MonoBehaviour
 {
