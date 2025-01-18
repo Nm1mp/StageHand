@@ -482,7 +482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &148798404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3310,6 +3310,8 @@ MonoBehaviour:
   - {fileID: 266439715}
   targetObject: {fileID: 266439715}
   targetPosition: {x: 10, y: -2.5, z: 4.5}
+  player: {fileID: 478510616}
+  playerRadius: 5
 --- !u!1 &1695091548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,6 +3738,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 128384, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
       propertyPath: m_RootOrder
       value: 2

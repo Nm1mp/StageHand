@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
-
+using System;
 
 public class Scene1Test : MonoBehaviour
 {
     public Transform TreeTrunk;
     public float moveSpeed = 2f;
 
-   [HideInInspector] public bool onGround = false; 
-    private bool isLifting = false; 
+    private bool onGround = false;
+    private bool isLifting = false;
 
     private Vector3 trunkDisappear = new Vector3(2, 13, 4.8f);
+
+    // Event to notify when the log is lifted
+    public event Action OnLogLifted;
 
     void Update()
     {
@@ -33,8 +35,11 @@ public class Scene1Test : MonoBehaviour
 
         if (TreeTrunk.localPosition == trunkDisappear)
         {
-            onGround = true; 
-            isLifting = false; 
+            onGround = true;
+            isLifting = false;
+
+            // Invoke the OnLogLifted event
+            OnLogLifted?.Invoke();
         }
     }
 
@@ -43,4 +48,5 @@ public class Scene1Test : MonoBehaviour
         return onGround;
     }
 }
+
 

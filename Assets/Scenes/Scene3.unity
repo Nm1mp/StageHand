@@ -5713,7 +5713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &148798404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6749,7 +6749,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441489305}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: feec1bf98727c0e4dab104b6c19c0ecb, type: 3}
   m_Name: 
@@ -7190,7 +7190,7 @@ Transform:
   m_GameObject: {fileID: 579262887}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: -11, y: 0.2, z: 0}
   m_LocalScale: {x: 1.0115492, y: 0.86060005, z: 0.86060005}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7369,7 +7369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &659352915
 Transform:
   m_ObjectHideFlags: 0
@@ -8155,7 +8155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &904648819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8879,7 +8879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1242013995
 Transform:
   m_ObjectHideFlags: 0
@@ -9305,9 +9305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drum: {fileID: 0}
   playerDrum: {fileID: 0}
-  invisWall: {fileID: 0}
-  Trumpet: {fileID: 1291988625}
-  PlayerTrump: {fileID: 1099477347}
+  trumpet: {fileID: 0}
+  playerTrumpet: {fileID: 0}
 --- !u!65 &1291988627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9540,7 +9539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1416956003
 Transform:
   m_ObjectHideFlags: 0
@@ -10209,7 +10208,7 @@ Transform:
   m_GameObject: {fileID: 1590489997}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 10, y: 0.2, z: 0}
+  m_LocalPosition: {x: 22, y: 0.2, z: 0}
   m_LocalScale: {x: 1.0115492, y: 0.86060005, z: 0.86060005}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10386,6 +10385,7 @@ GameObject:
   - component: {fileID: 1650499270}
   - component: {fileID: 1650499271}
   - component: {fileID: 1650499272}
+  - component: {fileID: 1650499273}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -10446,6 +10446,31 @@ MonoBehaviour:
   group3Lights:
   - {fileID: 1965134079}
   group3Target: {fileID: 0}
+--- !u!114 &1650499273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650499268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111b4a7c11ee8654f84c300267558dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftCurtain: {fileID: 579262888}
+  rightCurtain: {fileID: 1590489998}
+  moveSpeed: 2
+  isScene1: 0
+  scene1Test: {fileID: 0}
+  isScene2: 0
+  drum: {fileID: 0}
+  playerDrum: {fileID: 0}
+  isScene3: 1
+  trumpet: {fileID: 1291988625}
+  playerTrumpet: {fileID: 1099477347}
+  portName: COM4
+  baudRate: 9600
 --- !u!1 &1655482048
 GameObject:
   m_ObjectHideFlags: 0
@@ -10716,6 +10741,7 @@ GameObject:
   - component: {fileID: 1821517128}
   - component: {fileID: 1821517127}
   - component: {fileID: 1821517131}
+  - component: {fileID: 1821517132}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -10840,6 +10866,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1821517132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821517126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afe15ceda67a80498d7aee164db0c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drum: {fileID: 0}
+  playerDrum: {fileID: 0}
+  trumpet: {fileID: 1291988625}
+  playerTrumpet: {fileID: 1099477347}
 --- !u!1001 &1928962247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11247,7 +11289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1965134078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16582,6 +16624,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 128384, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -16642,7 +16688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2104351457
 Transform:
   m_ObjectHideFlags: 0
@@ -16894,7 +16940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2144515062
 MonoBehaviour:
   m_ObjectHideFlags: 0
