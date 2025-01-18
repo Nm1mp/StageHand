@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CloudMove : MonoBehaviour
 {
-    // Objects
+    // Plant things
     public GameObject Plant;
     public GameObject Seed;
     private bool plantSpawned = false;
@@ -12,12 +12,12 @@ public class CloudMove : MonoBehaviour
     // Bird things
     public Transform Bird;
     private float moveSpeed = 3.8f;
-    private Vector3 birdMove = new Vector3(-0.13f, -2.763f, 4.33f);
+    private Vector3 birdMove = new Vector3(-0.13f, -2.763f, 6.58f);
     [Space]
     // Drum things
     public Transform Drum;
     private float smooth = 3.8f;
-    private Vector3 drumMove = new Vector3(5.12f, -2.786f, 2.38f);
+    private Vector3 drumMove = new Vector3(5.12f, -2.786f, 3.46f);
     [Space]
     // Rain things
     private bool rainStarted = false;
@@ -27,13 +27,14 @@ public class CloudMove : MonoBehaviour
     [Space]
     // Cow things
     public Transform Cow;
-    private Vector3 cowMove = new Vector3(8.67f, -1.907f, 7.15f);
+    private Vector3 cowMove = new Vector3(8.67f, -1.907f, 7.67f);
     // Trumpet things
     public Transform Trumpet;
-    private Vector3 trumpMove = new Vector3(6.09f, -3.049f, 3.326f);
+    private Vector3 trumpMove = new Vector3(5.76999998f, -3.04900002f, 3.81999993f);
     // Dog Things
     public Transform Dog;
     private Vector3 dogMove = new Vector3(6.09f, -2.56f, 4.18f);
+
 
 
     void Update()
@@ -99,9 +100,12 @@ public class CloudMove : MonoBehaviour
                 //Debug.Log("Flower is active");
             }
 
-            if (Trumpet.localPosition == trumpMove)
+            if (Trumpet != null)
             {
-                Dog.localPosition = Vector3.MoveTowards(Dog.localPosition, dogMove, moveSpeed * Time.deltaTime); 
+                if (Trumpet.localPosition == trumpMove)
+                {
+                    Dog.localPosition = Vector3.MoveTowards(Dog.localPosition, dogMove, moveSpeed * Time.deltaTime);
+                }
             }
         }
     }

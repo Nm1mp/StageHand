@@ -5,15 +5,15 @@ using UnityEngine;
 public class Scene1Test : MonoBehaviour
 {
     public Transform TreeTrunk;
-    private bool onGround = false;
+    [HideInInspector] public bool onGround = false;
     public float moveSpeed = 2f;
-    private Vector3 trunkDisappear = new Vector3(2, 13, 4.8f);
+    private Vector3 trunkDisappear = new Vector3(1, 13, 6);
 
    void Update()
     {
         
         if (Input.GetKeyDown(KeyCode.X))
-        {
+        {   
             onGround = true;
         }
 
