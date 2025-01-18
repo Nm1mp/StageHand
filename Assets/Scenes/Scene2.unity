@@ -8498,6 +8498,9 @@ MonoBehaviour:
   scene1Test: {fileID: 0}
   isScene2: 0
   drum: {fileID: 6389064088857561754}
+  isScene3: 0
+  dog: {fileID: 0}
+  dogTargetPosition: {x: 0, y: 0, z: 0}
   portName: COM5
   baudRate: 9600
 --- !u!1 &1655482048
@@ -8810,6 +8813,7 @@ MonoBehaviour:
   RainFlow: 0
   Cow: {fileID: 0}
   Trumpet: {fileID: 0}
+  Dog: {fileID: 0}
 --- !u!1 &1957476660
 GameObject:
   m_ObjectHideFlags: 0
@@ -14251,7 +14255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2104351457
 Transform:
   m_ObjectHideFlags: 0

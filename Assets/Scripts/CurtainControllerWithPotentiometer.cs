@@ -2,6 +2,8 @@ using UnityEngine;
 using System.IO.Ports;
 using UnityEngine.SceneManagement;
 
+
+
 public class CurtainControllerWithPotentiometer : MonoBehaviour
 {
     public Transform leftCurtain;
@@ -9,14 +11,20 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
     public float moveSpeed = 2f;
 
     [Header("Scene 1 - Log Settings")]
-    public bool isScene1 = false; 
-    public Scene1Test scene1Test; 
+    public bool isScene1 = false;
+    public Scene1Test scene1Test;
     private bool isLogLifted = false;
 
     [Header("Scene 2 - Drum Settings")]
-    public bool isScene2 = false; 
-    public GameObject drum; 
+    public bool isScene2 = false;
+    public GameObject drum;
     private bool isDrumActive = false;
+
+    [Header("Scene 3 - Dog Settings")]
+    public bool isScene3 = false;
+    public Transform dog; 
+    public Vector3 dogTargetPosition;
+    private bool isDogAtTarget = false;
 
     [Header("Curtain Positions")]
     private float leftClosedPositionX = 0f;
@@ -66,14 +74,19 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
                 {
                     lastPotValue = potValue;
 
-                    if (isScene1 && CheckLogLifted(potValue)) 
+                    if (isScene1 && CheckLogLifted(potValue))
                     {
                         MoveCurtains(potValue);
                     }
-                    else if (isScene2 && CheckDrumActive(potValue)) 
+                    else if (isScene2 && CheckDrumActive(potValue))
                     {
                         MoveCurtains(potValue);
                         CheckCurtainClosedForScene3();
+                    }
+                    else if (isScene3 && CheckDogAtTarget(potValue))
+                    {
+                        MoveCurtains(potValue);
+                        CheckCurtainClosedForScene4();
                     }
                 }
             }
@@ -135,6 +148,33 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         return false;
     }
 
+    private bool CheckDogAtTarget(int potValue)
+    {
+        if (dog != null && Vector3.Distance(dog.localPosition, dogTargetPosition) < 0.1f)
+        {
+            isDogAtTarget = true;
+        }
+
+        if (isDogAtTarget)
+        {
+            if (potValue > potThreshold)
+            {
+                timeAboveThreshold += Time.deltaTime;
+                if (timeAboveThreshold >= holdTime)
+                {
+                    Debug.Log("Dog at target, curtains can close.");
+                    return true;
+                }
+            }
+            else
+            {
+                timeAboveThreshold = 0f;
+            }
+        }
+
+        return false;
+    }
+
     private void MoveCurtains(int potValue)
     {
         float normalizedValue = Mathf.Clamp01(potValue / 1023f);
@@ -155,6 +195,15 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         }
     }
 
+    private void CheckCurtainClosedForScene4()
+    {
+        if (leftCurtain.localPosition.x == leftClosedPositionX && rightCurtain.localPosition.x == rightClosedPositionX)
+        {
+            Debug.Log("Curtains fully closed, transitioning to Scene 4.");
+            SceneManager.LoadScene("Scene4");
+        }
+    }
+
     void OnApplicationQuit()
     {
         if (serialPort != null && serialPort.IsOpen)
@@ -163,6 +212,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         }
     }
 }
+
 
 
 
