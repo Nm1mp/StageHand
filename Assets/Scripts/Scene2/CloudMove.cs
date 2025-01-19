@@ -11,29 +11,37 @@ public class CloudMove : MonoBehaviour
     [Space]
     // Bird things
     public Transform Bird;
-    private float moveSpeed = 3.8f;
+    private float moveSpeed = 2.8f;
     private Vector3 birdMove = new Vector3(-0.13f, -2.763f, 6.58f);
     [Space]
     // Drum things
     public Transform Drum;
-    private float smooth = 3.8f;
+    private float smooth = 2.8f;
     private Vector3 drumMove = new Vector3(5.12f, -2.786f, 3.46f);
-    [Space]
     // Rain things
     private bool rainStarted = false;
+    [Space]
     public ParticleSystem Rain;
     public float RainFlow;
     private int rainTime = 3;
     [Space]
     // Cow things
     public Transform Cow;
-    private Vector3 cowMove = new Vector3(8.67f, -1.907f, 7.67f);
+    private Vector3 cowMove = new Vector3(6.14f, -1.02f, 7.36f);
+    [Space]
     // Trumpet things
     public Transform Trumpet;
-    private Vector3 trumpMove = new Vector3(5.76999998f, -3.04900002f, 3.81999993f);
+    private Vector3 trumpMove = new Vector3(5.032f, -3.051f, 5.184f);
+    [Space]
     // Dog Things
     public Transform Dog;
-    private Vector3 dogMove = new Vector3(6.09f, -2.56f, 4.18f);
+    private Vector3 dogMove = new Vector3(5.03200006f, -2.56f, 5.18400002f);
+    [Space]
+    public GameObject DonkSad_L;
+    public GameObject DonkExcited_L;
+    [Space]
+    public GameObject DonkSad_R;
+    public GameObject DonkExcited_R;
 
 
 
@@ -89,7 +97,7 @@ public class CloudMove : MonoBehaviour
                 {
                     Cow.localPosition = Vector3.MoveTowards(Cow.localPosition, cowMove, moveSpeed * Time.deltaTime);
                     Trumpet.localPosition = Vector3.MoveTowards(Trumpet.localPosition, trumpMove, moveSpeed * Time.deltaTime);
-                    Quaternion goal = Quaternion.Euler(0, 0, 196.973f);
+                    Quaternion goal = Quaternion.Euler(0, -180f, -83.28f);
                     Trumpet.rotation = Quaternion.Slerp(Trumpet.rotation, goal, Time.deltaTime * smooth);
 
                     if (Cow.localPosition == cowMove)
