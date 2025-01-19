@@ -1,6 +1,4 @@
-
 using UnityEngine;
-
 using System;
 
 public class Scene1Test : MonoBehaviour
@@ -13,12 +11,13 @@ public class Scene1Test : MonoBehaviour
 
     private Vector3 trunkDisappear = new Vector3(2, 13, 4.8f);
 
-    // Event to notify when the log is lifted
     public event Action OnLogLifted;
 
     void Update()
     {
-        if (!onGround && Input.GetKeyDown(KeyCode.X))
+        bool button3Pressed = SerialPortManager.Instance.IsButtonPressed(3);
+
+        if (!onGround && (Input.GetKeyDown(KeyCode.X) || button3Pressed))
         {
             isLifting = true;
         }
@@ -38,7 +37,6 @@ public class Scene1Test : MonoBehaviour
             onGround = true;
             isLifting = false;
 
-            // Invoke the OnLogLifted event
             OnLogLifted?.Invoke();
         }
     }
@@ -48,5 +46,3 @@ public class Scene1Test : MonoBehaviour
         return onGround;
     }
 }
-
-

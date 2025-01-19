@@ -1,39 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    // Scene 2
+    //scene 2
     public GameObject drum;
     public GameObject playerDrum;
+    public GameObject invisWall;
+    private bool drumNotHere = false;
+    //scene 3
+    public GameObject Trumpet;
+    public GameObject PlayerTrump;
+    private bool trumpNotHere;
 
-    // Scene 3
-    public GameObject trumpet;
-    public GameObject playerTrumpet;
-
-    private bool drumCollected = false;
-    private bool trumpetCollected = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (drum != null && !drumCollected)
+        if (drum != null)
         {
-            if (drum.activeSelf)
+            if (drum.activeSelf && !drumNotHere)
             {
-                playerDrum?.SetActive(true);
+                playerDrum.SetActive(true);
                 drum.SetActive(false);
-                drumCollected = true;
-                Debug.Log("Drum collected.");
+                invisWall.SetActive(false);
+            }
+            else
+            {
+                drumNotHere = true;
             }
         }
 
-        if (trumpet != null && !trumpetCollected)
+        if (Trumpet != null)
         {
-            if (trumpet.activeSelf)
+            if (Trumpet.activeSelf && !trumpNotHere)
             {
-                playerTrumpet?.SetActive(true);
-                trumpet.SetActive(false);
-                trumpetCollected = true;
-                Debug.Log("Trumpet collected.");
+                PlayerTrump.SetActive(true);
+                Trumpet.SetActive(false);
+                //invisWall.SetActive(false);
+            }
+            else
+            {
+                trumpNotHere = true;
             }
         }
     }

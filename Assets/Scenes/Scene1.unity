@@ -1112,7 +1112,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 441489307}
-  - component: {fileID: 441489306}
   m_Layer: 0
   m_Name: Rotator
   m_TagString: Untagged
@@ -1120,20 +1119,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &441489306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 441489305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feec1bf98727c0e4dab104b6c19c0ecb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backgroundParent: {fileID: 441489307}
-  rotationSpeed: 90
 --- !u!4 &441489307
 Transform:
   m_ObjectHideFlags: 0
@@ -3590,7 +3575,8 @@ GameObject:
   - component: {fileID: 1650499270}
   - component: {fileID: 1650499271}
   - component: {fileID: 1650499272}
-  - component: {fileID: 1650499273}
+  - component: {fileID: 1650499275}
+  - component: {fileID: 1650499276}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -3651,7 +3637,25 @@ MonoBehaviour:
   group3Lights:
   - {fileID: 1965134079}
   group3Target: {fileID: 0}
---- !u!114 &1650499273
+--- !u!114 &1650499275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650499268}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd6eee528d62804bba1693496988506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftCurtain: {fileID: 579262888}
+  rightCurtain: {fileID: 1590489998}
+  moveSpeed: 2
+  scene1Test: {fileID: 1814329480}
+  portName: COM5
+  baudRate: 9600
+--- !u!114 &1650499276
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3660,19 +3664,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1650499268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 111b4a7c11ee8654f84c300267558dee, type: 3}
+  m_Script: {fileID: 11500000, guid: ca9e09fff6c24a84289fef282e82dafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCurtain: {fileID: 579262888}
-  rightCurtain: {fileID: 1590489998}
-  moveSpeed: 2
-  isScene1: 1
-  scene1Test: {fileID: 1814329480}
-  isScene2: 0
-  drum: {fileID: 0}
-  isScene3: 0
-  dog: {fileID: 0}
-  dogTargetPosition: {x: 0, y: 0, z: 0}
   portName: COM4
   baudRate: 9600
 --- !u!1001 &1682738357
@@ -3871,8 +3865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  minX: -8
-  maxX: 8
+  minZ: -8
+  maxZ: 8
 --- !u!65 &1775967464
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4457,7 +4451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2104351457
 Transform:
   m_ObjectHideFlags: 0

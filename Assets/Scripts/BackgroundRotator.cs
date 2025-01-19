@@ -4,7 +4,7 @@ public class BackgroundRotator : MonoBehaviour
 {
     public Transform backgroundParent; 
     public float rotationSpeed = 90f;  
-    private bool isRotating = false;   
+   // private bool isRotating = false;   
 
     void Update()
     {
@@ -16,7 +16,7 @@ public class BackgroundRotator : MonoBehaviour
 
     private System.Collections.IEnumerator RotateBackground(float angle)
     {
-        isRotating = true; 
+      //  isRotating = true; 
 
         float targetAngle = backgroundParent.eulerAngles.y + angle;
         while (Mathf.Abs(Mathf.DeltaAngle(backgroundParent.eulerAngles.y, targetAngle)) > 0.1f)
@@ -33,7 +33,7 @@ public class BackgroundRotator : MonoBehaviour
         
         backgroundParent.rotation = Quaternion.Euler(0, targetAngle, 0);
 
-        isRotating = false; 
+        //isRotating = false; 
     }
 }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CloudMove : MonoBehaviour
 {
     // Plant things
@@ -35,17 +36,16 @@ public class CloudMove : MonoBehaviour
     public Transform Dog;
     private Vector3 dogMove = new Vector3(6.09f, -2.56f, 4.18f);
 
-
-
     void Update()
     {
-        if (Plant != null && Seed != null) {
-            if (Input.GetKeyDown(KeyCode.C))
+        bool button5Pressed = SerialPortManager.Instance.IsButtonPressed(5);
+
+        if (Plant != null && Seed != null)
+        {
+            if (Input.GetKeyDown(KeyCode.C) || button5Pressed)
             {
                 if (!rainStarted)
                 {
-                    //Debug.Log("Rain started");
-
                     Rain.Play();
                     rainStarted = true;
                 }
@@ -58,8 +58,6 @@ public class CloudMove : MonoBehaviour
 
             if (RainFlow >= rainTime && rainStarted)
             {
-                //Debug.Log("Rain stop");
-
                 Rain.Stop();
                 rainStarted = false;
 
@@ -78,13 +76,10 @@ public class CloudMove : MonoBehaviour
 
                     if (Bird.localPosition == birdMove)
                     {
-                        //Debug.Log("bird landed");
-                        //Debug.Log("cow landed");
                         plantSpawned = true;
                     }
-                    //Debug.Log("Bush is active");
                 }
-                else if (Cow != null && Trumpet != null) 
+                else if (Cow != null && Trumpet != null)
                 {
                     Cow.localPosition = Vector3.MoveTowards(Cow.localPosition, cowMove, moveSpeed * Time.deltaTime);
                     Trumpet.localPosition = Vector3.MoveTowards(Trumpet.localPosition, trumpMove, moveSpeed * Time.deltaTime);
@@ -96,8 +91,6 @@ public class CloudMove : MonoBehaviour
                         plantSpawned = true;
                     }
                 }
-
-                //Debug.Log("Flower is active");
             }
 
             if (Trumpet != null)
@@ -110,3 +103,4 @@ public class CloudMove : MonoBehaviour
         }
     }
 }
+

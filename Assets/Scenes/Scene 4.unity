@@ -1433,8 +1433,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  minX: -10
-  maxX: 10
+  minZ: -8
+  maxZ: 8
 --- !u!1 &579262887
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,6 +3208,7 @@ GameObject:
   - component: {fileID: 1650499272}
   - component: {fileID: 1650499273}
   - component: {fileID: 1650499275}
+  - component: {fileID: 1650499276}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -3299,8 +3300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e80531d8f9b1bc47ae809b27bd5de30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: COM4
-  baudRate: 9600
   lights:
   - {fileID: 2144515063}
   - {fileID: 904648820}
@@ -3312,6 +3311,20 @@ MonoBehaviour:
   targetPosition: {x: 10, y: -2.5, z: 4.5}
   player: {fileID: 478510616}
   playerRadius: 5
+--- !u!114 &1650499276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650499268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9e09fff6c24a84289fef282e82dafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portName: COM4
+  baudRate: 9600
 --- !u!1 &1695091548
 GameObject:
   m_ObjectHideFlags: 0

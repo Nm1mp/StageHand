@@ -7154,8 +7154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  minX: -8
-  maxX: 8
+  minZ: -8
+  maxZ: 8
 --- !u!4 &495387035 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b55b0f85b20f4f4e9ce5f80217edd08,
@@ -9305,8 +9305,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drum: {fileID: 0}
   playerDrum: {fileID: 0}
-  trumpet: {fileID: 0}
-  playerTrumpet: {fileID: 0}
+  invisWall: {fileID: 0}
+  Trumpet: {fileID: 0}
+  PlayerTrump: {fileID: 0}
 --- !u!65 &1291988627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10455,20 +10456,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1650499268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 111b4a7c11ee8654f84c300267558dee, type: 3}
+  m_Script: {fileID: 11500000, guid: ca9e09fff6c24a84289fef282e82dafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCurtain: {fileID: 579262888}
-  rightCurtain: {fileID: 1590489998}
-  moveSpeed: 2
-  isScene1: 0
-  scene1Test: {fileID: 0}
-  isScene2: 0
-  drum: {fileID: 0}
-  playerDrum: {fileID: 0}
-  isScene3: 1
-  trumpet: {fileID: 1291988625}
-  playerTrumpet: {fileID: 1099477347}
   portName: COM4
   baudRate: 9600
 --- !u!1 &1655482048
@@ -10880,8 +10870,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drum: {fileID: 0}
   playerDrum: {fileID: 0}
-  trumpet: {fileID: 1291988625}
-  playerTrumpet: {fileID: 1099477347}
+  invisWall: {fileID: 0}
+  Trumpet: {fileID: 1291988625}
+  PlayerTrump: {fileID: 1099477347}
 --- !u!1001 &1928962247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11131,8 +11122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  minX: -8
-  maxX: 8
+  minZ: -8
+  maxZ: 8
 --- !u!65 &1934438809
 BoxCollider:
   m_ObjectHideFlags: 0

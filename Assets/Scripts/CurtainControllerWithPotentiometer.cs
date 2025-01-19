@@ -129,7 +129,6 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
 
         return false;
     }
-
     private void HandleLogLifted()
     {
         Debug.Log("Log lifted event received.");
@@ -176,7 +175,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         {
             Debug.Log("Transitioning to Scene 4.");
             CleanupSerialPort();
-            SceneManager.LoadScene("Scene 4");
+            SceneManager.LoadScene("Scene4");
         }
     }
 
