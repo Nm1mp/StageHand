@@ -6,7 +6,7 @@ public class CloudMove : MonoBehaviour
 {
     // Plant things
     public GameObject Plant;
-    public GameObject Seed;
+    //public GameObject Seed;
     private bool plantSpawned = false;
     [Space]
     // Bird things
@@ -39,7 +39,8 @@ public class CloudMove : MonoBehaviour
 
     void Update()
     {
-        if (Plant != null && Seed != null) {
+        if (Plant != null) //&& Seed != null)
+        {
             if (Input.GetKeyDown(KeyCode.C))
             {
                 if (!rainStarted)
@@ -64,7 +65,7 @@ public class CloudMove : MonoBehaviour
                 rainStarted = false;
 
                 Plant.SetActive(true);
-                Seed.SetActive(false);
+                //Seed.SetActive(false);
             }
 
             if (Plant.activeSelf && !plantSpawned)

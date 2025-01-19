@@ -12,7 +12,7 @@ public class Scene1Test : MonoBehaviour
    [HideInInspector] public bool onGround = false; 
     private bool isLifting = false; 
 
-    private Vector3 trunkDisappear = new Vector3(2, 13, 4.8f);
+    private Vector3 trunkDisappear = new Vector3(1, 13, 6.66f);
 
     void Update()
     {
