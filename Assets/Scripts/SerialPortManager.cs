@@ -17,7 +17,7 @@ public class SerialPortManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Ensure the manager persists across scenes
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -45,7 +45,7 @@ public class SerialPortManager : MonoBehaviour
         {
             try
             {
-                string data = serialPort.ReadLine().Trim(); // Example format: "2:1;4:0;3:0;"
+                string data = serialPort.ReadLine().Trim(); 
                 ParseButtonStates(data);
             }
             catch (System.Exception e)
@@ -56,8 +56,7 @@ public class SerialPortManager : MonoBehaviour
     }
     public int GetPotentiometerValue()
     {
-        // Example: Replace 'P:' with your actual potentiometer parsing logic
-        if (buttonStates.ContainsKey(0)) // Assuming 0 is for potentiometer value
+        if (buttonStates.ContainsKey(0)) 
         {
             return buttonStates[0];
         }
