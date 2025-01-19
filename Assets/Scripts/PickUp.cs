@@ -15,6 +15,7 @@ public class PickUp : MonoBehaviour
     private bool trumpNotHere;
 
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (drum != null)
@@ -24,6 +25,7 @@ public class PickUp : MonoBehaviour
                 playerDrum.SetActive(true);
                 drum.SetActive(false);
                 invisWall.SetActive(false);
+                
             }
             else
             {

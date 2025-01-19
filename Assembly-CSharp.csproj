@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CurtainController.cs" />
     <Compile Include="Assets\Scripts\CurtainControllerWithPotentiometer.cs" />
+    <Compile Include="Assets\AudioPickUp.cs" />
     <Compile Include="Assets\Ardity\Scripts\Samples\SampleUserPolling_ReadWrite.cs" />
     <Compile Include="Assets\Scripts\SlidePotLightControl.cs" />
     <Compile Include="Assets\Scripts\Scene2\CloudMove.cs" />
