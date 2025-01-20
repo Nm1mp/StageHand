@@ -1,20 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class objMover : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float minX = -8f;
-    [SerializeField] private float maxX = 8f;
+    [SerializeField] private float minZ = -8f; 
+    [SerializeField] private float maxZ = 8f;  
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(0, 0, -horizontalInput) * speed * Time.deltaTime;
+        float verticalInput = Input.GetAxis("Horizontal");
+
+        if (SerialPortManager.Instance.IsButtonPressed(4)) verticalInput = 1;  
+        if (SerialPortManager.Instance.IsButtonPressed(2)) verticalInput = -1; 
+
+        Vector3 movement = new Vector3(0, 0, verticalInput) * speed * Time.deltaTime;
         transform.Translate(movement);
 
-        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+        float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
+        transform.position = new Vector3(transform.position.x, transform.position.y, clampedZ);
     }
 }
+
