@@ -48,12 +48,14 @@ public class PickUp : MonoBehaviour
                 if (DonkLeft.activeSelf)
                 {
                     playerDrum1.SetActive(true);
-                    DonkSad_L.SetActive(false);
-                    DonkExicite_L.SetActive(true);
+                    
+;
                 }
 
                 drum.SetActive(false);
-                invisWall.SetActive(false);
+                invisWall.SetActive(false); 
+                DonkExicite_L.SetActive(true);
+                DonkSad_L.SetActive(false);
             }
             else
             {

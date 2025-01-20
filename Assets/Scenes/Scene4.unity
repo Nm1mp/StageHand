@@ -7901,7 +7901,7 @@ MonoBehaviour:
   - {fileID: 2144515063}
   - {fileID: 904648820}
   - {fileID: 1965134079}
-  player: {fileID: 1988048360}
+  player: {fileID: 0}
   cat: {fileID: 266439710}
 --- !u!114 &1650499275
 MonoBehaviour:

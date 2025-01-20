@@ -148,7 +148,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
             Mathf.Approximately(rightCurtain.localPosition.x, rightClosedPositionX))
         {
             Debug.Log("Transitioning to Scene 4.");
-            SceneManager.LoadScene("Scene 4");
+            SceneManager.LoadScene("Scene4");
         }
     }
     private void CheckCurtainClosedForScene5()
