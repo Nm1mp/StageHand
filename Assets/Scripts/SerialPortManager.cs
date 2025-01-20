@@ -15,15 +15,14 @@ public class SerialPortManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton pattern to ensure only one instance persists
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Mark this GameObject as persistent
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate instances
+            Destroy(gameObject); 
         }
     }
 
@@ -68,14 +67,14 @@ public class SerialPortManager : MonoBehaviour
             if (keyValue.Length == 2)
             {
                 string key = keyValue[0];
-                if (key == "K" || key == "S") // Potentiometer values
+                if (key == "K" || key == "S") 
                 {
                     if (int.TryParse(keyValue[1], out int potValue))
                     {
                         potentiometerValues[key] = potValue;
                     }
                 }
-                else if (int.TryParse(key, out int button)) // Button values
+                else if (int.TryParse(key, out int button)) 
                 {
                     if (int.TryParse(keyValue[1], out int buttonState))
                     {

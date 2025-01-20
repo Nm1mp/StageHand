@@ -11174,7 +11174,9 @@ MonoBehaviour:
   RainFlow: 0
   Cow: {fileID: 0}
   Trumpet: {fileID: 0}
-  Dog: {fileID: 0}
+  DogLeft: {fileID: 0}
+  DogR: {fileID: 0}
+  DogRight: {fileID: 0}
   DonkSad_L: {fileID: 0}
   DonkExcited_L: {fileID: 0}
   DonkSad_R: {fileID: 0}
@@ -11480,7 +11482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   group1Lights:
   - {fileID: 2144515063}
-  group1Target: {fileID: 478510616}
+  group1Target: {fileID: 0}
   group2Lights:
   - {fileID: 904648820}
   group2Target: {fileID: 0}

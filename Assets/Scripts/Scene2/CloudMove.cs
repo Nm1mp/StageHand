@@ -33,8 +33,10 @@ public class CloudMove : MonoBehaviour
     public Transform Trumpet;
     private Vector3 trumpMove = new Vector3(5.032f, -3.051f, 5.184f);
     [Space]
-    // Dog Things
-    public Transform Dog;
+    // Dog things
+    public GameObject DogLeft;
+    public GameObject DogR;
+    public Transform DogRight;
     private Vector3 dogMove = new Vector3(5.03200006f, -2.56f, 5.18400002f);
     [Space]
     public GameObject DonkSad_L;
@@ -111,13 +113,7 @@ public class CloudMove : MonoBehaviour
                 //Debug.Log("Flower is active");
             }
 
-            if (Trumpet != null)
-            {
-                if (Trumpet.localPosition == trumpMove)
-                {
-                    Dog.localPosition = Vector3.MoveTowards(Dog.localPosition, dogMove, moveSpeed * Time.deltaTime);
-                }
-            }
+         
         }
     }
 }
