@@ -36,14 +36,11 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
 
     void Start()
     {
-        // Initialize curtain positions
         leftCurtain.localPosition = new Vector3(leftClosedPositionX, leftCurtain.localPosition.y, leftCurtain.localPosition.z);
         rightCurtain.localPosition = new Vector3(rightClosedPositionX, rightCurtain.localPosition.y, rightCurtain.localPosition.z);
 
-        // Reset the curtain opening flag for the current scene
         curtainsOpening = true;
 
-        // Scene-specific initialization
         if (isScene1 && scene1Test != null)
         {
             scene1Test.OnLogLifted += HandleLogLifted;
@@ -60,7 +57,6 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
 
         if (SerialPortManager.Instance != null)
         {
-            // Read the knob potentiometer value (A0 for curtains)
             int knobValue = SerialPortManager.Instance.GetPotentiometerValue("K");
 
             if (isScene1 && CheckLogLifted())
@@ -100,7 +96,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         if (Mathf.Approximately(leftCurtain.localPosition.x, leftOpenPositionX) &&
             Mathf.Approximately(rightCurtain.localPosition.x, rightOpenPositionX))
         {
-            curtainsOpening = false; // Curtains have fully opened
+            curtainsOpening = false; 
         }
     }
 
