@@ -7407,6 +7407,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447686594}
   m_Mesh: {fileID: -5495902117074765545, guid: 1e85ad960361e6d4a8f16ff32fcd36e8, type: 3}
+--- !u!1 &511863041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511863042}
+  m_Layer: 0
+  m_Name: TR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &511863042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511863041}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.60103, y: -6.4104085, z: 28.939142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &549484912
 GameObject:
   m_ObjectHideFlags: 0
@@ -12129,6 +12160,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417788071}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1430924551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1430924552}
+  m_Layer: 0
+  m_Name: TL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1430924552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430924551}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.60103, y: -6.4104085, z: 28.939142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1466430819
 GameObject:
   m_ObjectHideFlags: 0
@@ -12974,6 +13036,9 @@ MonoBehaviour:
   isScene3: 1
   trumpet: {fileID: 718249514}
   playerTrumpet: {fileID: 1869586211}
+  isScene4: 0
+  violin: {fileID: 0}
+  playerViolin: {fileID: 0}
 --- !u!1 &1672075322
 GameObject:
   m_ObjectHideFlags: 0
@@ -19970,8 +20035,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  minX: -8
-  maxX: 8
+  minZ: -8
+  maxZ: 8
+  forwardModel: {fileID: 1708146954}
+  backwardModel: {fileID: 1020756963}
+  forwardDrum: {fileID: 1430924551}
+  backwardDrum: {fileID: 511863041}
 --- !u!65 &2107103152
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22134,3 +22203,5 @@ SceneRoots:
   - {fileID: 2130249144}
   - {fileID: 1176846721}
   - {fileID: 719945015}
+  - {fileID: 511863042}
+  - {fileID: 1430924552}

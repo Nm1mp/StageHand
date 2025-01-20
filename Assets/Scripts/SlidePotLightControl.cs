@@ -20,7 +20,7 @@ public class SlidePotLightControl : MonoBehaviour
             if (potValue > 100)
             {
                 SetLightsActive(true);
-                float intensity = Mathf.Clamp((potValue - 100) / 18f, 0, 50);
+                float intensity = Mathf.Clamp((potValue - 23) / 50f, 0, 100);
                 SetLightsIntensity(intensity);
                 UpdateLightPositions();
             }
