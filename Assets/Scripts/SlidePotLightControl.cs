@@ -10,23 +10,26 @@ public class SlidePotLightControl : MonoBehaviour
     [SerializeField] private float playerRadius = 5f;
 
     private bool hasReachedTargetPosition = false;
+    private bool lightsWereOff = false; 
 
     void Update()
     {
         if (SerialPortManager.Instance != null)
         {
-            int potValue = SerialPortManager.Instance.GetPotentiometerValue("S"); // Fetch slide potentiometer value
+            int potValue = SerialPortManager.Instance.GetPotentiometerValue("S"); 
 
             if (potValue > 100)
             {
                 SetLightsActive(true);
-                float intensity = Mathf.Clamp((potValue - 23) / 50f, 0, 100);
+                float intensity = Mathf.Clamp((potValue - 23) / 100f, 0, 100);
                 SetLightsIntensity(intensity);
                 UpdateLightPositions();
+                lightsWereOff = false; 
             }
             else
             {
                 SetLightsActive(false);
+                lightsWereOff = true; 
             }
 
             HandleTargetObjectMovement();
@@ -39,9 +42,9 @@ public class SlidePotLightControl : MonoBehaviour
 
     private void HandleTargetObjectMovement()
     {
-        if (AreLightsOn() && targetObject != null)
+        if (targetObject != null)
         {
-            if (!hasReachedTargetPosition)
+            if (!lightsWereOff && AreLightsOn() && !hasReachedTargetPosition)
             {
                 targetObject.position = Vector3.MoveTowards(targetObject.position, targetPosition, 2f * Time.deltaTime);
 
@@ -50,13 +53,17 @@ public class SlidePotLightControl : MonoBehaviour
                     hasReachedTargetPosition = true;
                 }
             }
-            else
+            else if (AreLightsOn() && hasReachedTargetPosition)
             {
                 float distanceToPlayer = Vector3.Distance(targetObject.position, player.position);
                 if (distanceToPlayer <= playerRadius)
                 {
                     targetObject.position = Vector3.MoveTowards(targetObject.position, player.position + Vector3.up * 2f, 2f * Time.deltaTime);
                 }
+            }
+            else if (lightsWereOff)
+            {
+                hasReachedTargetPosition = false;
             }
         }
     }
