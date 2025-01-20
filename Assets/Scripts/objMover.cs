@@ -7,14 +7,17 @@ public class objMover : MonoBehaviour
     [SerializeField] private float maxZ = 8f;
 
     [Header("Models")]
-    [SerializeField] private GameObject forwardModel;  
+    [SerializeField] private GameObject forwardModel;
     [SerializeField] private GameObject backwardModel;
     [SerializeField] private GameObject forwardDrum;
     [SerializeField] private GameObject backwardDrum;
     [SerializeField] private GameObject forwardM;
     [SerializeField] private GameObject backwardM;
 
-    private float lastInput = 0; 
+    [Header("Drum Reference")]
+    [SerializeField] private GameObject drum;
+
+    private float lastInput = 0;
 
     void Update()
     {
@@ -26,14 +29,23 @@ public class objMover : MonoBehaviour
         if (verticalInput > 0)
         {
             ActivateModel(forwardModel, backwardModel);
-            ActivateDrum(forwardDrum, backwardDrum);
+
+            if (drum == null || !drum.activeSelf) 
+            {
+                ActivateDrum(forwardDrum, backwardDrum);
+            }
+
             ActivateM(forwardM, backwardM);
         }
-
         else if (verticalInput < 0)
         {
             ActivateModel(backwardModel, forwardModel);
-            ActivateDrum(backwardDrum, forwardDrum);
+
+            if (drum == null || !drum.activeSelf) 
+            {
+                ActivateDrum(backwardDrum, forwardDrum);
+            }
+
             ActivateM(backwardM, forwardM);
         }
 
@@ -48,17 +60,19 @@ public class objMover : MonoBehaviour
     {
         if (!modelToActivate.activeSelf) modelToActivate.SetActive(true);
         if (modelToDeactivate.activeSelf) modelToDeactivate.SetActive(false);
-        
-        
     }
+
     private void ActivateDrum(GameObject drumToActivate, GameObject drumToDeactivate)
     {
         if (!drumToActivate.activeSelf) drumToActivate.SetActive(true);
         if (drumToDeactivate.activeSelf) drumToDeactivate.SetActive(false);
     }
+
     private void ActivateM(GameObject mToActivate, GameObject mToDeactivate)
     {
         if (!mToActivate.activeSelf) mToActivate.SetActive(true);
         if (mToDeactivate.activeSelf) mToDeactivate.SetActive(false);
     }
+
+    
 }
