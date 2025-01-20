@@ -10,18 +10,20 @@ public class SerialPortManager : MonoBehaviour
 
     private Dictionary<int, int> buttonStates = new Dictionary<int, int>();
     private Dictionary<string, int> potentiometerValues = new Dictionary<string, int>();
+
     public static SerialPortManager Instance;
 
     void Awake()
     {
+        // Singleton pattern to ensure only one instance persists
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Ensure the manager persists across scenes
+            DontDestroyOnLoad(gameObject); // Mark this GameObject as persistent
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroy duplicate instances
         }
     }
 
@@ -45,7 +47,7 @@ public class SerialPortManager : MonoBehaviour
         {
             try
             {
-                string data = serialPort.ReadLine().Trim(); // Example: "2:1;4:0;3:1;P:512;S:300;"
+                string data = serialPort.ReadLine().Trim();
                 ParseData(data);
             }
             catch (System.Exception e)
@@ -66,43 +68,37 @@ public class SerialPortManager : MonoBehaviour
             if (keyValue.Length == 2)
             {
                 string key = keyValue[0];
-
-                // Parse button states
-                if (int.TryParse(key, out int button))
-                {
-                    if (int.TryParse(keyValue[1], out int buttonState))
-                    {
-                        buttonStates[button] = buttonState;
-                    }
-                }
-                // Parse potentiometer values
-                else if (key == "K" || key == "S")
+                if (key == "K" || key == "S") // Potentiometer values
                 {
                     if (int.TryParse(keyValue[1], out int potValue))
                     {
                         potentiometerValues[key] = potValue;
                     }
                 }
+                else if (int.TryParse(key, out int button)) // Button values
+                {
+                    if (int.TryParse(keyValue[1], out int buttonState))
+                    {
+                        buttonStates[button] = buttonState;
+                    }
+                }
             }
         }
+    }
+
+    public int GetPotentiometerValue(string key)
+    {
+        if (potentiometerValues.ContainsKey(key))
+        {
+            return potentiometerValues[key];
+        }
+        Debug.LogWarning($"Potentiometer type {key} not found.");
+        return 0;
     }
 
     public bool IsButtonPressed(int buttonNumber)
     {
         return buttonStates.ContainsKey(buttonNumber) && buttonStates[buttonNumber] == 1;
-    }
-
-    public int GetPotentiometerValue(string type)
-    {
-        if (potentiometerValues.ContainsKey(type))
-        {
-            return potentiometerValues[type];
-        }
-        else
-        {
-            Debug.LogWarning($"Potentiometer type {type} not found.");
-            return -1; // Default invalid value
-        }
     }
 
     void OnApplicationQuit()

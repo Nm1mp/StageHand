@@ -38,10 +38,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         // Reset the curtain opening flag for the current scene
         curtainsOpening = true;
 
-        // Validate scene settings
-        ValidateSceneSettings();
-
-        // Subscribe to the log lifted event for Scene 1
+        // Scene-specific initialization
         if (isScene1 && scene1Test != null)
         {
             scene1Test.OnLogLifted += HandleLogLifted;
@@ -58,7 +55,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
 
         if (SerialPortManager.Instance != null)
         {
-            // Read knob potentiometer value (A0 for curtains)
+            // Read the knob potentiometer value (A0 for curtains)
             int knobValue = SerialPortManager.Instance.GetPotentiometerValue("K");
 
             if (isScene1 && CheckLogLifted())
@@ -66,12 +63,12 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
                 MoveCurtains(knobValue);
                 CheckCurtainClosedForScene2();
             }
-            else if (isScene2 && playerDrum.activeSelf)
+            else if (isScene2 && playerDrum != null && playerDrum.activeSelf)
             {
                 MoveCurtains(knobValue);
                 CheckCurtainClosedForScene3();
             }
-            else if (isScene3 && playerTrumpet.activeSelf)
+            else if (isScene3 && playerTrumpet != null && playerTrumpet.activeSelf)
             {
                 MoveCurtains(knobValue);
                 CheckCurtainClosedForScene4();
@@ -80,15 +77,6 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         else
         {
             Debug.LogWarning("SerialPortManager instance is null.");
-        }
-    }
-
-    private void ValidateSceneSettings()
-    {
-        int activeScenes = (isScene1 ? 1 : 0) + (isScene2 ? 1 : 0) + (isScene3 ? 1 : 0);
-        if (activeScenes > 1)
-        {
-            Debug.LogError("Multiple scene flags are active. Only one should be active at a time.");
         }
     }
 
@@ -154,7 +142,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
             Mathf.Approximately(rightCurtain.localPosition.x, rightClosedPositionX))
         {
             Debug.Log("Transitioning to Scene 4.");
-            SceneManager.LoadScene("Scene4");
+            SceneManager.LoadScene("Scene 4");
         }
     }
 }
