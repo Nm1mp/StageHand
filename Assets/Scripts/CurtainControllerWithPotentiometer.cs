@@ -1,8 +1,5 @@
 using UnityEngine;
-using System.IO.Ports;
 using UnityEngine.SceneManagement;
-
-
 
 public class CurtainControllerWithPotentiometer : MonoBehaviour
 {
@@ -13,166 +10,99 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
     [Header("Scene 1 - Log Settings")]
     public bool isScene1 = false;
     public Scene1Test scene1Test;
-    private bool isLogLifted = false;
 
     [Header("Scene 2 - Drum Settings")]
     public bool isScene2 = false;
     public GameObject drum;
-    private bool isDrumActive = false;
+    public GameObject playerDrum;
 
-    [Header("Scene 3 - Dog Settings")]
+    [Header("Scene 3 - Trumpet Settings")]
     public bool isScene3 = false;
-    public Transform dog; 
-    public Vector3 dogTargetPosition;
-    private bool isDogAtTarget = false;
+    public GameObject trumpet;
+    public GameObject playerTrumpet;
 
     [Header("Curtain Positions")]
     private float leftClosedPositionX = 0f;
-    private float leftOpenPositionX = -19f;
+    private float leftOpenPositionX = -11f;
     private float rightClosedPositionX = 10f;
-    private float rightOpenPositionX = 32f;
+    private float rightOpenPositionX = 22f;
 
-    private SerialPort serialPort;
-    [SerializeField] private string portName = "COM5";
-    [SerializeField] private int baudRate = 9600;
-
-    private float lastPotValue = -1;
-    private float timeAboveThreshold = 0f;
-    private const int potThreshold = 900;
-    private const float holdTime = 3f;
+    private bool curtainsOpening = true;
 
     void Start()
     {
-        if (isScene1)
-        {
-            scene1Test = FindObjectOfType<Scene1Test>();
-        }
+        // Initialize curtain positions
+        leftCurtain.localPosition = new Vector3(leftClosedPositionX, leftCurtain.localPosition.y, leftCurtain.localPosition.z);
+        rightCurtain.localPosition = new Vector3(rightClosedPositionX, rightCurtain.localPosition.y, rightCurtain.localPosition.z);
 
-        serialPort = new SerialPort(portName, baudRate);
-        try
-        {
-            serialPort.Open();
-            Debug.Log("Serial port opened successfully.");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error opening serial port: " + e.Message);
-        }
+        // Reset the curtain opening flag for the current scene
+        curtainsOpening = true;
 
-        leftCurtain.localPosition = new Vector3(leftOpenPositionX, leftCurtain.localPosition.y, leftCurtain.localPosition.z);
-        rightCurtain.localPosition = new Vector3(rightOpenPositionX, rightCurtain.localPosition.y, rightCurtain.localPosition.z);
+        // Scene-specific initialization
+        if (isScene1 && scene1Test != null)
+        {
+            scene1Test.OnLogLifted += HandleLogLifted;
+        }
     }
 
     void Update()
     {
-        if (serialPort != null && serialPort.IsOpen)
+        if (curtainsOpening)
         {
-            try
-            {
-                string data = serialPort.ReadLine().Trim();
-                if (int.TryParse(data, out int potValue))
-                {
-                    lastPotValue = potValue;
+            OpenCurtains();
+            return;
+        }
 
-                    if (isScene1 && CheckLogLifted(potValue))
-                    {
-                        MoveCurtains(potValue);
-                    }
-                    else if (isScene2 && CheckDrumActive(potValue))
-                    {
-                        MoveCurtains(potValue);
-                        CheckCurtainClosedForScene3();
-                    }
-                    else if (isScene3 && CheckDogAtTarget(potValue))
-                    {
-                        MoveCurtains(potValue);
-                        CheckCurtainClosedForScene4();
-                    }
-                }
-            }
-            catch (System.Exception e)
+        if (SerialPortManager.Instance != null)
+        {
+            // Read the knob potentiometer value (A0 for curtains)
+            int knobValue = SerialPortManager.Instance.GetPotentiometerValue("K");
+
+            if (isScene1 && CheckLogLifted())
             {
-                Debug.LogWarning("Error reading from serial port: " + e.Message);
+                MoveCurtains(knobValue);
+                CheckCurtainClosedForScene2();
             }
+            else if (isScene2 && playerDrum != null && playerDrum.activeSelf)
+            {
+                MoveCurtains(knobValue);
+                CheckCurtainClosedForScene3();
+            }
+            else if (isScene3 && playerTrumpet != null && playerTrumpet.activeSelf)
+            {
+                MoveCurtains(knobValue);
+                CheckCurtainClosedForScene4();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("SerialPortManager instance is null.");
         }
     }
 
-    private bool CheckLogLifted(int potValue)
+    private void OpenCurtains()
     {
-        if (scene1Test != null)
-        {
-            isLogLifted = scene1Test.IsLogLifted();
-        }
+        leftCurtain.localPosition = Vector3.MoveTowards(leftCurtain.localPosition,
+            new Vector3(leftOpenPositionX, leftCurtain.localPosition.y, leftCurtain.localPosition.z), moveSpeed * Time.deltaTime);
+        rightCurtain.localPosition = Vector3.MoveTowards(rightCurtain.localPosition,
+            new Vector3(rightOpenPositionX, rightCurtain.localPosition.y, rightCurtain.localPosition.z), moveSpeed * Time.deltaTime);
 
-        if (isLogLifted)
+        if (Mathf.Approximately(leftCurtain.localPosition.x, leftOpenPositionX) &&
+            Mathf.Approximately(rightCurtain.localPosition.x, rightOpenPositionX))
         {
-            if (potValue > potThreshold)
-            {
-                timeAboveThreshold += Time.deltaTime;
-                if (timeAboveThreshold >= holdTime)
-                {
-                    Debug.Log("Log lifted, curtains can close.");
-                    return true;
-                }
-            }
-            else
-            {
-                timeAboveThreshold = 0f;
-            }
+            curtainsOpening = false; // Curtains have fully opened
         }
-
-        return false;
     }
 
-    private bool CheckDrumActive(int potValue)
+    private bool CheckLogLifted()
     {
-        isDrumActive = drum != null && drum.activeSelf;
-
-        if (isDrumActive)
-        {
-            if (potValue > potThreshold)
-            {
-                timeAboveThreshold += Time.deltaTime;
-                if (timeAboveThreshold >= holdTime)
-                {
-                    Debug.Log("Drum active, curtains can close.");
-                    return true;
-                }
-            }
-            else
-            {
-                timeAboveThreshold = 0f;
-            }
-        }
-
-        return false;
+        return scene1Test != null && scene1Test.IsLogLifted();
     }
 
-    private bool CheckDogAtTarget(int potValue)
+    private void HandleLogLifted()
     {
-        if (dog != null && Vector3.Distance(dog.localPosition, dogTargetPosition) < 0.1f)
-        {
-            isDogAtTarget = true;
-        }
-
-        if (isDogAtTarget)
-        {
-            if (potValue > potThreshold)
-            {
-                timeAboveThreshold += Time.deltaTime;
-                if (timeAboveThreshold >= holdTime)
-                {
-                    Debug.Log("Dog at target, curtains can close.");
-                    return true;
-                }
-            }
-            else
-            {
-                timeAboveThreshold = 0f;
-            }
-        }
-
-        return false;
+        Debug.Log("Log lifted event received.");
+        curtainsOpening = false;
     }
 
     private void MoveCurtains(int potValue)
@@ -186,36 +116,33 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         rightCurtain.localPosition = new Vector3(rightCurtainX, rightCurtain.localPosition.y, rightCurtain.localPosition.z);
     }
 
+    private void CheckCurtainClosedForScene2()
+    {
+        if (Mathf.Approximately(leftCurtain.localPosition.x, leftClosedPositionX) &&
+            Mathf.Approximately(rightCurtain.localPosition.x, rightClosedPositionX))
+        {
+            Debug.Log("Transitioning to Scene 2.");
+            SceneManager.LoadScene("Scene2");
+        }
+    }
+
     private void CheckCurtainClosedForScene3()
     {
-        if (leftCurtain.localPosition.x == leftClosedPositionX && rightCurtain.localPosition.x == rightClosedPositionX)
+        if (Mathf.Approximately(leftCurtain.localPosition.x, leftClosedPositionX) &&
+            Mathf.Approximately(rightCurtain.localPosition.x, rightClosedPositionX))
         {
-            Debug.Log("Curtains fully closed, transitioning to Scene 3.");
+            Debug.Log("Transitioning to Scene 3.");
             SceneManager.LoadScene("Scene3");
         }
     }
 
     private void CheckCurtainClosedForScene4()
     {
-        if (leftCurtain.localPosition.x == leftClosedPositionX && rightCurtain.localPosition.x == rightClosedPositionX)
+        if (Mathf.Approximately(leftCurtain.localPosition.x, leftClosedPositionX) &&
+            Mathf.Approximately(rightCurtain.localPosition.x, rightClosedPositionX))
         {
-            Debug.Log("Curtains fully closed, transitioning to Scene 4.");
-            SceneManager.LoadScene("Scene4");
-        }
-    }
-
-    void OnApplicationQuit()
-    {
-        if (serialPort != null && serialPort.IsOpen)
-        {
-            serialPort.Close();
+            Debug.Log("Transitioning to Scene 4.");
+            SceneManager.LoadScene("Scene 4");
         }
     }
 }
-
-
-
-
-
-
-

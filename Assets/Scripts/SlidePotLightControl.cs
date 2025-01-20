@@ -1,80 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO.Ports;
 using UnityEngine;
-
 
 public class SlidePotLightControl : MonoBehaviour
 {
-    [SerializeField] private string portName = "COM4";
-    [SerializeField] private int baudRate = 9600;
-
     [SerializeField] private Light[] lights;
     [SerializeField] private Transform[] lightTargets;
-
-    [SerializeField] private Transform targetObject; 
+    [SerializeField] private Transform targetObject;
     [SerializeField] private Vector3 targetPosition;
-    [SerializeField] private Transform player; 
-    [SerializeField] private float playerRadius = 5f; 
+    [SerializeField] private Transform player;
+    [SerializeField] private float playerRadius = 5f;
 
-    private SerialPort serialPort;
-    private bool hasReachedTargetPosition = false; 
-
-    void Start()
-    {
-        serialPort = new SerialPort(portName, baudRate);
-
-        try
-        {
-            serialPort.Open();
-            Debug.Log("Serial port opened successfully.");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error opening serial port: " + e.Message);
-            serialPort = null;
-        }
-
-        SetLightsActive(false);
-    }
+    private bool hasReachedTargetPosition = false;
 
     void Update()
     {
-        if (serialPort != null && serialPort.IsOpen)
+        if (SerialPortManager.Instance != null)
         {
-            try
-            {
-                string data = serialPort.ReadLine().Trim();
+            int potValue = SerialPortManager.Instance.GetPotentiometerValue("S"); // Fetch slide potentiometer value
 
-                if (!string.IsNullOrEmpty(data) && IsValidPotentiometerValue(data, out int potValue))
-                {
-                    if (potValue > 100)
-                    {
-                        SetLightsActive(true);
-                        float intensity = Mathf.Clamp((potValue - 100) / 18f, 0, 50);
-                        SetLightsIntensity(intensity);
-                        UpdateLightPositions();
-                    }
-                    else
-                    {
-                        SetLightsActive(false);
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning($"Invalid data received: \"{data}\"");
-                }
-            }
-            catch (System.Exception e)
+            if (potValue > 100)
             {
-                Debug.LogWarning("Error reading from serial port: " + e.Message);
+                SetLightsActive(true);
+                float intensity = Mathf.Clamp((potValue - 100) / 18f, 0, 50);
+                SetLightsIntensity(intensity);
+                UpdateLightPositions();
             }
+            else
+            {
+                SetLightsActive(false);
+            }
+
+            HandleTargetObjectMovement();
         }
         else
         {
-            Debug.LogWarning("Serial port not available. Potentiometer mechanics disabled.");
+            Debug.LogWarning("SerialPortManager instance is null.");
         }
+    }
 
+    private void HandleTargetObjectMovement()
+    {
         if (AreLightsOn() && targetObject != null)
         {
             if (!hasReachedTargetPosition)
@@ -106,18 +70,6 @@ public class SlidePotLightControl : MonoBehaviour
                 return true;
             }
         }
-        return false;
-    }
-
-    private bool IsValidPotentiometerValue(string data, out int value)
-    {
-        value = 0;
-
-        if (int.TryParse(data, out value))
-        {
-            return value >= 0 && value <= 1023;
-        }
-
         return false;
     }
 
@@ -159,16 +111,4 @@ public class SlidePotLightControl : MonoBehaviour
             }
         }
     }
-
-    void OnApplicationQuit()
-    {
-        if (serialPort != null && serialPort.IsOpen)
-        {
-            serialPort.Close();
-        }
-    }
 }
-
-
-
-

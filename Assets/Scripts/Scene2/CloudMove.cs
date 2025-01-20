@@ -49,9 +49,12 @@ public class CloudMove : MonoBehaviour
 
     void Update()
     {
+
         if (Plant != null) //&& Seed != null)
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            bool button5Pressed = SerialPortManager.Instance.IsButtonPressed(5);
+
+            if (Input.GetKeyDown(KeyCode.C) || button5Pressed)
             {
                 if (!rainStarted)
                 {

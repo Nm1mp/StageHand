@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-
+using System;
 
 public class Scene1Test : MonoBehaviour
 {
     public Transform TreeTrunk;
     public float moveSpeed = 2f;
 
-   [HideInInspector] public bool onGround = false; 
-    private bool isLifting = false; 
+    private bool onGround = false;
+    private bool isLifting = false;
 
     private Vector3 trunkDisappear = new Vector3(1, 13, 6.66f);
 
+    public event Action OnLogLifted;
+
     void Update()
     {
-        if (!onGround && Input.GetKeyDown(KeyCode.X))
+        bool button3Pressed = SerialPortManager.Instance.IsButtonPressed(3);
+
+        if (!onGround && (Input.GetKeyDown(KeyCode.X) || button3Pressed))
         {
             isLifting = true;
         }
@@ -33,8 +34,10 @@ public class Scene1Test : MonoBehaviour
 
         if (TreeTrunk.localPosition == trunkDisappear)
         {
-            onGround = true; 
-            isLifting = false; 
+            onGround = true;
+            isLifting = false;
+
+            OnLogLifted?.Invoke();
         }
     }
 
@@ -43,4 +46,3 @@ public class Scene1Test : MonoBehaviour
         return onGround;
     }
 }
-
