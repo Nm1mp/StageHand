@@ -13,7 +13,7 @@ public class PickUp : MonoBehaviour
     //scene 3
     public GameObject Trumpet;
     public GameObject PlayerTrump1;
-    public GameObject PlayerTrump2;
+    //public GameObject PlayerTrump2;
     private bool trumpNotHere;
 
     public GameObject DonkRight;
@@ -51,7 +51,7 @@ public class PickUp : MonoBehaviour
             if (Trumpet.activeSelf && !trumpNotHere)
             {
                 PlayerTrump1.SetActive(true);
-                PlayerTrump2.SetActive(true);
+                //PlayerTrump2.SetActive(true);
                 Trumpet.SetActive(false);
                 //invisWall.SetActive(false);
             }

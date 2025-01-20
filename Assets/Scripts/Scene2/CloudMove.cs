@@ -27,14 +27,16 @@ public class CloudMove : MonoBehaviour
     [Space]
     // Cow things
     public Transform Cow;
-    private Vector3 cowMove = new Vector3(6.14f, -1.02f, 7.36f);
+    private Vector3 cowMove = new Vector3(6.14f, -0.43f, 7.36f);
     [Space]
     // Trumpet things
     public Transform Trumpet;
     private Vector3 trumpMove = new Vector3(5.032f, -3.051f, 5.184f);
     [Space]
     // Dog Things
-    public Transform Dog;
+    public GameObject DogLeft;
+    public GameObject DogR;
+    public Transform DogRight;
     private Vector3 dogMove = new Vector3(5.03200006f, -2.56f, 5.18400002f);
     [Space]
     public GameObject DonkSad_L;
@@ -113,7 +115,13 @@ public class CloudMove : MonoBehaviour
             {
                 if (Trumpet.localPosition == trumpMove)
                 {
-                    Dog.localPosition = Vector3.MoveTowards(Dog.localPosition, dogMove, moveSpeed * Time.deltaTime);
+                    DogLeft.SetActive(false);
+                    DogR.SetActive(true);
+
+                    if (DogR.activeSelf)
+                    {
+                        DogRight.localPosition = Vector3.MoveTowards(DogRight.localPosition, dogMove, moveSpeed * Time.deltaTime);
+                    }
                 }
             }
         }

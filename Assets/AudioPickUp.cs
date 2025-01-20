@@ -35,9 +35,9 @@ public class AudioPickUp : MonoBehaviour
         Brass.volume = 0.0f;
         Strings.volume = 0.0f;
 
-        Debug.Log(Percussion.volume);
-        Debug.Log(Strings.volume); 
-        Debug.Log(Brass.volume);
+        //Debug.Log(Percussion.volume);
+        //Debug.Log(Strings.volume); 
+        //Debug.Log(Brass.volume);
     }
 
     private void Update()
