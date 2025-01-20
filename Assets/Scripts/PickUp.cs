@@ -16,7 +16,11 @@ public class PickUp : MonoBehaviour
     public GameObject Trumpet;
     public GameObject PlayerTrump1;
     //public GameObject PlayerTrump2;
-    private bool trumpNotHere;
+    private bool TrumpNotHere;
+    [Space]
+    public GameObject Violin;
+    public GameObject PlayerViolin;
+    private bool ViolinNotHere;
     [Space]
     public GameObject DonkRight;
     public GameObject DonkLeft;
@@ -59,7 +63,7 @@ public class PickUp : MonoBehaviour
 
         if (Trumpet != null)
         {
-            if (Trumpet.activeSelf && !trumpNotHere)
+            if (Trumpet.activeSelf && !TrumpNotHere)
             {
                 PlayerTrump1.SetActive(true);
                 //PlayerTrump2.SetActive(true);
@@ -68,7 +72,22 @@ public class PickUp : MonoBehaviour
             }
             else
             {
-                trumpNotHere = true;
+                TrumpNotHere = true;
+            }
+        }
+
+        if (Violin != null)
+        {
+            if (Violin.activeSelf && !ViolinNotHere)
+            {
+                PlayerViolin.SetActive(true);
+                //PlayerTrump2.SetActive(true);
+                Violin.SetActive(false);
+                invisWall.SetActive(false);
+            }
+            else
+            {
+                ViolinNotHere = true;
             }
         }
     }
