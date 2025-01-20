@@ -12,7 +12,7 @@ public class CloudMove : MonoBehaviour
     // Bird things
     public Transform Bird;
     private float moveSpeed = 2.8f;
-    private Vector3 birdMove = new Vector3(-0.13f, -2.763f, 6.58f);
+    private Vector3 birdMove = new Vector3(-1.19500005f, -2.32599998f, 5.8920002f);
     [Space]
     // Drum things
     public Transform Drum;
@@ -82,8 +82,8 @@ public class CloudMove : MonoBehaviour
                 {
                     Bird.localPosition = Vector3.MoveTowards(Bird.localPosition, birdMove, moveSpeed * Time.deltaTime);
                     Drum.localPosition = Vector3.MoveTowards(Drum.localPosition, drumMove, moveSpeed * Time.deltaTime);
-                    Quaternion target = Quaternion.Euler(0, 0, 0);
-                    Drum.rotation = Quaternion.Slerp(Drum.rotation, target, Time.deltaTime * smooth);
+                    //Quaternion target = Quaternion.Euler(0, 0, 0);
+                    //Drum.rotation = Quaternion.Slerp(Drum.rotation, target, Time.deltaTime * smooth);
 
                     if (Bird.localPosition == birdMove)
                     {

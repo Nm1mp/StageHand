@@ -18,8 +18,10 @@ public class AudioPickUp : MonoBehaviour
     public float minVolume = 0.0f;
     public float MaxVolume = 0.46f;
 
-    public GameObject playerDrum;
-    public GameObject playerTrumpet;
+    public GameObject playerDrum1;
+    public GameObject playerDrum2;
+    public GameObject playerTrumpet1;
+    public GameObject playerTrumpet2;
     public GameObject playerViolin;
 
     bool DrumPickUp = false;
@@ -41,14 +43,14 @@ public class AudioPickUp : MonoBehaviour
     private void Update()
     {
         
-        if (playerDrum.activeSelf && DrumPickUp == false)
+        if (playerDrum1.activeSelf && DrumPickUp == false || playerDrum2.activeSelf && DrumPickUp == false)
         {
             PercussionPlaying = true;
             PercussionToggle();
             DrumPickUp = true;
         }
 
-        if (playerTrumpet != null && playerTrumpet.activeSelf && TrumpetPickUp == false)
+        if (playerTrumpet1 != null && playerTrumpet1.activeSelf && TrumpetPickUp == false || playerTrumpet2 != null && playerTrumpet2.activeSelf && TrumpetPickUp == false)
         {
             BrassPlaying = true;
             BrassToggle();

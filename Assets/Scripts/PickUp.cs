@@ -6,13 +6,18 @@ public class PickUp : MonoBehaviour
 {
     //scene 2
     public GameObject drum;
-    public GameObject playerDrum;
+    public GameObject playerDrum1;
+    public GameObject playerDrum2;
     public GameObject invisWall;
     private bool drumNotHere = false;
     //scene 3
     public GameObject Trumpet;
-    public GameObject PlayerTrump;
+    public GameObject PlayerTrump1;
+    public GameObject PlayerTrump2;
     private bool trumpNotHere;
+
+    public GameObject DonkRight;
+    public GameObject DonkLeft;
 
 
 
@@ -22,10 +27,18 @@ public class PickUp : MonoBehaviour
         {
             if (drum.activeSelf && !drumNotHere)
             {
-                playerDrum.SetActive(true);
+                if (DonkRight.activeSelf)
+                {
+                    playerDrum2.SetActive(true);
+                }
+
+                if (DonkLeft.activeSelf)
+                {
+                    playerDrum1.SetActive(true);
+                }
+
                 drum.SetActive(false);
                 invisWall.SetActive(false);
-                
             }
             else
             {
@@ -37,7 +50,8 @@ public class PickUp : MonoBehaviour
         {
             if (Trumpet.activeSelf && !trumpNotHere)
             {
-                PlayerTrump.SetActive(true);
+                PlayerTrump1.SetActive(true);
+                PlayerTrump2.SetActive(true);
                 Trumpet.SetActive(false);
                 //invisWall.SetActive(false);
             }
