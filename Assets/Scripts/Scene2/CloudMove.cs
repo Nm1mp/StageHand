@@ -12,7 +12,7 @@ public class CloudMove : MonoBehaviour
     // Bird things
     public Transform Bird;
     private float moveSpeed = 2.8f;
-    private Vector3 birdMove = new Vector3(-0.13f, -2.763f, 6.58f);
+    private Vector3 birdMove = new Vector3(-1.19500005f, -2.32599998f, 5.8920002f);
     [Space]
     // Drum things
     public Transform Drum;
@@ -27,13 +27,13 @@ public class CloudMove : MonoBehaviour
     [Space]
     // Cow things
     public Transform Cow;
-    private Vector3 cowMove = new Vector3(6.14f, -1.02f, 7.36f);
+    private Vector3 cowMove = new Vector3(6.14f, -0.43f, 7.36f);
     [Space]
     // Trumpet things
     public Transform Trumpet;
     private Vector3 trumpMove = new Vector3(5.032f, -3.051f, 5.184f);
     [Space]
-    // Dog things
+    // Dog Things
     public GameObject DogLeft;
     public GameObject DogR;
     public Transform DogRight;
@@ -49,10 +49,11 @@ public class CloudMove : MonoBehaviour
 
     void Update()
     {
-        bool button5Pressed = SerialPortManager.Instance.IsButtonPressed(5);
 
         if (Plant != null) //&& Seed != null)
         {
+            bool button5Pressed = SerialPortManager.Instance.IsButtonPressed(5);
+
             if (Input.GetKeyDown(KeyCode.C) || button5Pressed)
             {
                 if (!rainStarted)
@@ -86,8 +87,8 @@ public class CloudMove : MonoBehaviour
                 {
                     Bird.localPosition = Vector3.MoveTowards(Bird.localPosition, birdMove, moveSpeed * Time.deltaTime);
                     Drum.localPosition = Vector3.MoveTowards(Drum.localPosition, drumMove, moveSpeed * Time.deltaTime);
-                    Quaternion target = Quaternion.Euler(0, 0, 0);
-                    Drum.rotation = Quaternion.Slerp(Drum.rotation, target, Time.deltaTime * smooth);
+                    //Quaternion target = Quaternion.Euler(0, 0, 0);
+                    //Drum.rotation = Quaternion.Slerp(Drum.rotation, target, Time.deltaTime * smooth);
 
                     if (Bird.localPosition == birdMove)
                     {
@@ -113,7 +114,19 @@ public class CloudMove : MonoBehaviour
                 //Debug.Log("Flower is active");
             }
 
-         
+            if (Trumpet != null)
+            {
+                if (Trumpet.localPosition == trumpMove)
+                {
+                    DogLeft.SetActive(false);
+                    DogR.SetActive(true);
+
+                    if (DogR.activeSelf)
+                    {
+                        DogRight.localPosition = Vector3.MoveTowards(DogRight.localPosition, dogMove, moveSpeed * Time.deltaTime);
+                    }
+                }
+            }
         }
     }
 }
