@@ -5706,6 +5706,7 @@ GameObject:
   - component: {fileID: 1650499271}
   - component: {fileID: 1650499272}
   - component: {fileID: 1650499273}
+  - component: {fileID: 1650499274}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -5780,6 +5781,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portName: COM4
   baudRate: 9600
+--- !u!114 &1650499274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650499268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111b4a7c11ee8654f84c300267558dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftCurtain: {fileID: 579262888}
+  rightCurtain: {fileID: 1590489998}
+  moveSpeed: 1
+  isScene1: 1
+  scene1Test: {fileID: 1814329478}
+  isScene2: 0
+  drum: {fileID: 0}
+  playerDrum: {fileID: 0}
+  isScene3: 0
+  trumpet: {fileID: 0}
+  playerTrumpet: {fileID: 0}
 --- !u!1 &1695091548
 GameObject:
   m_ObjectHideFlags: 0
@@ -6077,6 +6101,18 @@ PrefabInstance:
       addedObject: {fileID: 1317048794}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 058133b5b5c8a5f499fd4b0f379947a5, type: 3}
+--- !u!114 &1814329478 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5342015699096133573, guid: 058133b5b5c8a5f499fd4b0f379947a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1814329477}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5958996a7316b2a45a875d795d6df71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1814329479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3530571971063020301, guid: 058133b5b5c8a5f499fd4b0f379947a5,
@@ -7052,7 +7088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2104351457
 Transform:
   m_ObjectHideFlags: 0

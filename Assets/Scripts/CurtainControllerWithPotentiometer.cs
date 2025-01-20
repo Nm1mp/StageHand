@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.IO.Ports;
 using UnityEngine.SceneManagement;
 
 public class CurtainControllerWithPotentiometer : MonoBehaviour
@@ -28,26 +27,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
     private float rightClosedPositionX = 10f;
     private float rightOpenPositionX = 22f;
 
-    private SerialPort serialPort;
-    [SerializeField] private string portName = "COM4";
-    [SerializeField] private int baudRate = 9600;
-
     private bool curtainsOpening = true;
-    private float lastPotValue = -1;
-
-    void Awake()
-    {
-        serialPort = new SerialPort(portName, baudRate);
-        try
-        {
-            serialPort.Open();
-            Debug.Log("Serial port opened successfully.");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error opening serial port: " + e.Message);
-        }
-    }
 
     void Start()
     {
@@ -55,13 +35,16 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
         leftCurtain.localPosition = new Vector3(leftClosedPositionX, leftCurtain.localPosition.y, leftCurtain.localPosition.z);
         rightCurtain.localPosition = new Vector3(rightClosedPositionX, rightCurtain.localPosition.y, rightCurtain.localPosition.z);
 
-        if (isScene1)
+        // Reset the curtain opening flag for the current scene
+        curtainsOpening = true;
+
+        // Validate scene settings
+        ValidateSceneSettings();
+
+        // Subscribe to the log lifted event for Scene 1
+        if (isScene1 && scene1Test != null)
         {
-            scene1Test = FindObjectOfType<Scene1Test>();
-            if (scene1Test != null)
-            {
-                scene1Test.OnLogLifted += HandleLogLifted;
-            }
+            scene1Test.OnLogLifted += HandleLogLifted;
         }
     }
 
@@ -73,36 +56,39 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
             return;
         }
 
-        if (serialPort != null && serialPort.IsOpen)
+        if (SerialPortManager.Instance != null)
         {
-            try
-            {
-                string data = serialPort.ReadLine().Trim();
-                if (int.TryParse(data, out int potValue))
-                {
-                    lastPotValue = potValue;
+            // Read knob potentiometer value (A0 for curtains)
+            int knobValue = SerialPortManager.Instance.GetPotentiometerValue("K");
 
-                    if (isScene1 && CheckLogLifted())
-                    {
-                        MoveCurtains(potValue);
-                        CheckCurtainClosedForScene2();
-                    }
-                    else if (isScene2 && playerDrum.activeSelf)
-                    {
-                        MoveCurtains(potValue);
-                        CheckCurtainClosedForScene3();
-                    }
-                    else if (isScene3 && playerTrumpet.activeSelf)
-                    {
-                        MoveCurtains(potValue);
-                        CheckCurtainClosedForScene4();
-                    }
-                }
-            }
-            catch (System.Exception e)
+            if (isScene1 && CheckLogLifted())
             {
-                Debug.LogWarning("Error reading from serial port: " + e.Message);
+                MoveCurtains(knobValue);
+                CheckCurtainClosedForScene2();
             }
+            else if (isScene2 && playerDrum.activeSelf)
+            {
+                MoveCurtains(knobValue);
+                CheckCurtainClosedForScene3();
+            }
+            else if (isScene3 && playerTrumpet.activeSelf)
+            {
+                MoveCurtains(knobValue);
+                CheckCurtainClosedForScene4();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("SerialPortManager instance is null.");
+        }
+    }
+
+    private void ValidateSceneSettings()
+    {
+        int activeScenes = (isScene1 ? 1 : 0) + (isScene2 ? 1 : 0) + (isScene3 ? 1 : 0);
+        if (activeScenes > 1)
+        {
+            Debug.LogError("Multiple scene flags are active. Only one should be active at a time.");
         }
     }
 
@@ -122,13 +108,9 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
 
     private bool CheckLogLifted()
     {
-        if (scene1Test != null)
-        {
-            return scene1Test.IsLogLifted();
-        }
-
-        return false;
+        return scene1Test != null && scene1Test.IsLogLifted();
     }
+
     private void HandleLogLifted()
     {
         Debug.Log("Log lifted event received.");
@@ -152,7 +134,6 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
             Mathf.Approximately(rightCurtain.localPosition.x, rightClosedPositionX))
         {
             Debug.Log("Transitioning to Scene 2.");
-            CleanupSerialPort();
             SceneManager.LoadScene("Scene2");
         }
     }
@@ -163,7 +144,6 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
             Mathf.Approximately(rightCurtain.localPosition.x, rightClosedPositionX))
         {
             Debug.Log("Transitioning to Scene 3.");
-            CleanupSerialPort();
             SceneManager.LoadScene("Scene3");
         }
     }
@@ -174,23 +154,7 @@ public class CurtainControllerWithPotentiometer : MonoBehaviour
             Mathf.Approximately(rightCurtain.localPosition.x, rightClosedPositionX))
         {
             Debug.Log("Transitioning to Scene 4.");
-            CleanupSerialPort();
             SceneManager.LoadScene("Scene4");
         }
-    }
-
-    private void CleanupSerialPort()
-    {
-        if (serialPort != null && serialPort.IsOpen)
-        {
-            serialPort.Close();
-            serialPort = null;
-        }
-    }
-
-    void OnApplicationQuit()
-    {
-        //
-        CleanupSerialPort();
     }
 }

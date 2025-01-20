@@ -5,12 +5,11 @@ using UnityEngine;
 public class SerialPortManager : MonoBehaviour
 {
     private SerialPort serialPort;
-    [SerializeField] private string portName = "COM4"; // Adjust your port
+    [SerializeField] private string portName = "COM4";
     [SerializeField] private int baudRate = 9600;
 
     private Dictionary<int, int> buttonStates = new Dictionary<int, int>();
-    private int potentiometerValue = 0;
-
+    private Dictionary<string, int> potentiometerValues = new Dictionary<string, int>();
     public static SerialPortManager Instance;
 
     void Awake()
@@ -18,7 +17,7 @@ public class SerialPortManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Make persistent across scenes
+            DontDestroyOnLoad(gameObject); // Ensure the manager persists across scenes
         }
         else
         {
@@ -46,7 +45,7 @@ public class SerialPortManager : MonoBehaviour
         {
             try
             {
-                string data = serialPort.ReadLine().Trim(); // Example format: "2:1;4:0;P:512;"
+                string data = serialPort.ReadLine().Trim(); // Example: "2:1;4:0;3:1;P:512;S:300;"
                 ParseData(data);
             }
             catch (System.Exception e)
@@ -58,25 +57,31 @@ public class SerialPortManager : MonoBehaviour
 
     private void ParseData(string data)
     {
-        string[] entries = data.Split(';');
-        foreach (string entry in entries)
+        string[] keyValuePairs = data.Split(';');
+        foreach (string pair in keyValuePairs)
         {
-            if (string.IsNullOrEmpty(entry)) continue;
+            if (string.IsNullOrEmpty(pair)) continue;
 
-            if (entry.StartsWith("P:")) // Potentiometer data
+            string[] keyValue = pair.Split(':');
+            if (keyValue.Length == 2)
             {
-                string potValueStr = entry.Substring(2);
-                if (int.TryParse(potValueStr, out int potValue))
+                string key = keyValue[0];
+
+                // Parse button states
+                if (int.TryParse(key, out int button))
                 {
-                    potentiometerValue = potValue;
+                    if (int.TryParse(keyValue[1], out int buttonState))
+                    {
+                        buttonStates[button] = buttonState;
+                    }
                 }
-            }
-            else // Button data
-            {
-                string[] parts = entry.Split(':');
-                if (parts.Length == 2 && int.TryParse(parts[0], out int button) && int.TryParse(parts[1], out int state))
+                // Parse potentiometer values
+                else if (key == "K" || key == "S")
                 {
-                    buttonStates[button] = state;
+                    if (int.TryParse(keyValue[1], out int potValue))
+                    {
+                        potentiometerValues[key] = potValue;
+                    }
                 }
             }
         }
@@ -87,9 +92,17 @@ public class SerialPortManager : MonoBehaviour
         return buttonStates.ContainsKey(buttonNumber) && buttonStates[buttonNumber] == 1;
     }
 
-    public int GetPotentiometerValue()
+    public int GetPotentiometerValue(string type)
     {
-        return potentiometerValue;
+        if (potentiometerValues.ContainsKey(type))
+        {
+            return potentiometerValues[type];
+        }
+        else
+        {
+            Debug.LogWarning($"Potentiometer type {type} not found.");
+            return -1; // Default invalid value
+        }
     }
 
     void OnApplicationQuit()

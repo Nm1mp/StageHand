@@ -3204,7 +3204,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1650499270}
-  - component: {fileID: 1650499271}
   - component: {fileID: 1650499272}
   - component: {fileID: 1650499273}
   - component: {fileID: 1650499275}
@@ -3231,23 +3230,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1650499271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650499268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd32ced134513a64dac8e0cdbc4d0784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskText: {fileID: 845659526}
-  completionTextObject: {fileID: 1563352124}
-  taskCanvasGroup: {fileID: 845659528}
-  fadeDuration: 1
-  completionDisplayDuration: 5
 --- !u!114 &1650499272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3307,10 +3289,6 @@ MonoBehaviour:
   lightTargets:
   - {fileID: 478510616}
   - {fileID: 266439715}
-  targetObject: {fileID: 266439715}
-  targetPosition: {x: 10, y: -2.5, z: 4.5}
-  player: {fileID: 478510616}
-  playerRadius: 5
 --- !u!114 &1650499276
 MonoBehaviour:
   m_ObjectHideFlags: 0
